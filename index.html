@@ -33,12 +33,8 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 @media(max-width:640px){
   .desktop-only{display:none !important}
   .mobile-only{display:block !important}
-  /* cat-intro queda arriba, pegado al wizard que viene debajo */
-  #catalogo{padding-top:0}
-  #cat-intro{padding:32px 20px 28px;margin:0 0 0 0;border-radius:0}
+  #cat-intro{padding:28px 20px;margin:-24px -16px 24px}
   #cat-intro-prices{display:none}
-  /* wizard fluye justo debajo del cat-intro, sin gap */
-  #wizard{padding-top:24px}
 }
 
 /* ══ WIZARD MÓVIL ══ */
@@ -257,14 +253,6 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 
 /* ══ HERO ══ */
 #hero{background:#12001f;overflow:hidden;position:relative}
-
-@media(max-width:640px){
-  #hero-catalog-wrap{display:flex;flex-direction:column}
-  #catalogo{order:1}
-  #hero{order:2;overflow:hidden;position:relative;z-index:0}
-  #wizard{order:3;position:relative;z-index:1;background:#ffffff}
-  #hero-bg{display:none}
-}
 #hero-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:clamp(80px,22vw,240px);color:white;opacity:.05;letter-spacing:-.03em;text-transform:uppercase;pointer-events:none;user-select:none;white-space:nowrap;z-index:0}
 #stage{position:relative;z-index:5;display:grid;grid-template-columns:1fr 1fr;height:300px}
 .lane{position:relative;overflow:hidden;cursor:pointer;border-top:1px solid rgba(255,255,255,.07);transition:background-color 500ms ease}
@@ -445,9 +433,6 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
   </button>
 </header>
 
-<!-- ══ WRAPPER REORDEN MÓVIL ══ -->
-<div id="hero-catalog-wrap">
-
 <!-- ══ HERO ══ -->
 <div id="hero">
   <div id="hero-bg">PIJAMAS</div>
@@ -524,37 +509,34 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
     <div class="prod-grid" id="grid-pants"></div>
   </div>
 
-</div><!-- /#catalogo -->
+  <!-- ══ WIZARD MÓVIL ══ -->
+  <div id="wizard" class="mobile-only">
+    <!-- Combos armados -->
+    <div id="wizard-combos"></div>
+    <!-- Botón agregar combo -->
+    <button id="wizard-add-btn" onclick="wizardNew()">
+      <span id="wizard-add-icon">＋</span>
+      <div>
+        <div id="wizard-add-title">Armar otro combo</div>
+        <div id="wizard-add-sub">Camiseta + Pantalón · $99.900 con envío</div>
+      </div>
+    </button>
 
-<!-- ══ WIZARD MÓVIL ══ -->
-<div id="wizard" class="mobile-only">
-  <!-- Combos armados -->
-  <div id="wizard-combos"></div>
-  <!-- Botón agregar combo -->
-  <button id="wizard-add-btn" onclick="wizardNew()">
-    <span id="wizard-add-icon">＋</span>
-    <div>
-      <div id="wizard-add-title">Armar otro combo</div>
-      <div id="wizard-add-sub">Camiseta + Pantalón · $99.900 con envío</div>
-    </div>
-  </button>
-
-  <!-- Prendas individuales -->
-  <div id="wz-individual">
-    <div id="wz-individual-title">¿Solo una prenda?</div>
-    <div id="wz-individual-sub">También puedes llevar camiseta o pantalón por separado. El envío se cobra aparte ($10.000).</div>
-    <div class="wz-ind-section">
-      <div class="wz-ind-label">Camisetas — $45.000 c/u</div>
-      <div class="prod-grid" id="grid-tops-mobile"></div>
-    </div>
-    <div class="wz-ind-section">
-      <div class="wz-ind-label">Pantalones — $70.000 c/u</div>
-      <div class="prod-grid" id="grid-pants-mobile"></div>
+    <!-- Prendas individuales -->
+    <div id="wz-individual">
+      <div id="wz-individual-title">¿Solo una prenda?</div>
+      <div id="wz-individual-sub">También puedes llevar camiseta o pantalón por separado. El envío se cobra aparte ($10.000).</div>
+      <div class="wz-ind-section">
+        <div class="wz-ind-label">Camisetas — $45.000 c/u</div>
+        <div class="prod-grid" id="grid-tops-mobile"></div>
+      </div>
+      <div class="wz-ind-section">
+        <div class="wz-ind-label">Pantalones — $70.000 c/u</div>
+        <div class="prod-grid" id="grid-pants-mobile"></div>
+      </div>
     </div>
   </div>
-</div><!-- /#wizard -->
-
-</div><!-- /#hero-catalog-wrap -->
+</div>
 
 <!-- ══ PROCESO DE COMPRA ══ -->
 <section id="proceso">
