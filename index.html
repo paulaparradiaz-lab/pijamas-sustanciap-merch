@@ -22,7 +22,7 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 #hdr-nav{display:flex;align-items:center;gap:2px;margin-left:auto}
 #hdr-nav a{font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background 150ms,color 150ms;white-space:nowrap}
 #hdr-nav a:hover{background:rgba(255,255,255,.07);color:white}
-#hdr-cart-btn{margin-left:12px;background:#7F77DD;color:white;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;padding:7px 16px;border-radius:20px;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background 150ms;flex-shrink:0}
+#hdr-cart-btn{margin-left:auto;background:#7F77DD;color:white;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;padding:7px 16px;border-radius:20px;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background 150ms;flex-shrink:0}
 #hdr-cart-btn:hover{background:#534AB7}
 #hdr-cart-count{background:white;color:#7F77DD;border-radius:50%;width:17px;height:17px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800}
 @media(max-width:640px){#hdr-nav{display:none}#site-header{gap:12px}}
@@ -995,14 +995,15 @@ function renderPanel(){
 }
 
 window.toggleCart=function(){
-  var p=document.getElementById("pij-cpanel"),o=document.getElementById("pij-cart-overlay");
-  if(p.classList.contains("on")){p.classList.remove("on");o.classList.remove("on");document.body.style.overflow="";}
-  else{renderPanel();p.classList.add("on");o.classList.add("on");document.body.style.overflow="hidden";}
+  var p=document.getElementById("pij-cpanel"),o=document.getElementById("pij-cart-overlay"),fab=document.getElementById("pij-fab");
+  if(p.classList.contains("on")){p.classList.remove("on");o.classList.remove("on");document.body.style.overflow="";if(fab)fab.style.display="";}
+  else{renderPanel();p.classList.add("on");o.classList.add("on");document.body.style.overflow="hidden";if(fab)fab.style.display="none";}
 };
 window.closePanel=function(){
   document.getElementById("pij-cpanel").classList.remove("on");
   document.getElementById("pij-cart-overlay").classList.remove("on");
   document.body.style.overflow="";
+  var fab=document.getElementById("pij-fab");if(fab)fab.style.display="";
 };
 
 /* ── CHECKOUT ── */
