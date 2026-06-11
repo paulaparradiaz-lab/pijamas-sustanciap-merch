@@ -1,0 +1,999 @@
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;500;600;700;800;900&display=swap");
+*{box-sizing:border-box;margin:0;padding:0}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+body{font-family:'Nunito',sans-serif;background:#12001f}
+
+/* ══ TOP BAR ══ */
+#top-bar{background:#12001f;color:rgba(255,255,255,.75);font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;letter-spacing:.01em;display:flex;align-items:center;justify-content:center;gap:10px;padding:9px 24px;position:sticky;top:0;z-index:501}
+#top-bar a{color:white;font-weight:800;text-decoration:underline;white-space:nowrap}
+.top-bar-pill{background:rgba(255,255,255,.15);color:white;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:2px 10px;border-radius:60px}
+
+/* ══ HEADER ══ */
+#site-header{position:sticky;top:0;z-index:500;background:rgba(18,0,31,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);height:60px;display:flex;align-items:center;padding:0 20px;gap:20px}
+#hdr-logo{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0}
+#hdr-logo-mark{width:32px;height:32px;background:#7F77DD;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:14px;color:white;flex-shrink:0}
+#hdr-logo-name{font-family:Anton,sans-serif;font-size:14px;letter-spacing:.12em;color:white;text-transform:uppercase;line-height:1}
+#hdr-logo-sub{font-family:'Nunito',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-top:2px}
+#hdr-nav{display:flex;align-items:center;gap:2px;margin-left:auto}
+#hdr-nav a{font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background 150ms,color 150ms;white-space:nowrap}
+#hdr-nav a:hover{background:rgba(255,255,255,.07);color:white}
+#hdr-cart-btn{margin-left:12px;background:#7F77DD;color:white;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;padding:7px 16px;border-radius:20px;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background 150ms;flex-shrink:0}
+#hdr-cart-btn:hover{background:#534AB7}
+#hdr-cart-count{background:white;color:#7F77DD;border-radius:50%;width:17px;height:17px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800}
+@media(max-width:640px){#hdr-nav{display:none}#site-header{gap:12px}}
+
+/* ══ RESPONSIVE DESKTOP/MOBILE ══ */
+.desktop-only{display:block}
+.mobile-only{display:none}
+@media(max-width:640px){
+  .desktop-only{display:none}
+  .mobile-only{display:block}
+  #cat-intro{padding:28px 20px;margin:-24px -16px 24px}
+  #cat-intro-prices{display:none}
+}
+
+/* ══ WIZARD MÓVIL ══ */
+#wizard{padding-bottom:24px}
+#wizard-combos{display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
+.wz-card{background:#fff;border:2px solid #ede9ff;border-radius:16px;overflow:hidden;transition:border-color .2s}
+.wz-card.complete{border-color:#7F77DD}
+.wz-card-head{background:#12001f;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.wz-card-num{background:#7F77DD;color:white;font-family:Anton,sans-serif;font-size:11px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.wz-card-title{font-family:Anton,sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:white;margin-left:8px;flex:1}
+.wz-card-price{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#a89ff0}
+.wz-card-del{background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.4);width:24px;height:24px;border-radius:50%;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.wz-card-del:hover{background:rgba(255,100,100,.2);color:#ff6b6b}
+.wz-steps{padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+.wz-step{display:flex;flex-direction:column;gap:8px}
+.wz-step-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#888;display:flex;align-items:center;gap:6px}
+.wz-step-label span{background:#f0eeff;color:#7F77DD;font-size:9px;font-weight:800;padding:2px 8px;border-radius:60px}
+.wz-options{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.wz-options::-webkit-scrollbar{display:none}
+.wz-opt{flex-shrink:0;width:80px;border:2px solid #ede9ff;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .15s;background:#fff}
+.wz-opt.selected{border-color:#7F77DD;box-shadow:0 0 0 3px rgba(127,119,221,.15)}
+.wz-opt-vis{height:64px;display:flex;align-items:center;justify-content:center}
+.wz-opt-name{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#333;text-align:center;padding:4px 4px 6px;line-height:1.2}
+.wz-step-size{display:flex;gap:6px;flex-wrap:wrap}
+.wz-sz{background:#f4f2fa;border:1.5px solid #ede9ff;color:#555;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;transition:all .15s}
+.wz-sz.on{background:#7F77DD;border-color:#7F77DD;color:white}
+.wz-divider{height:1px;background:#f0eeff}
+.wz-card-footer{padding:12px 16px;background:#faf9ff;display:flex;align-items:center;justify-content:space-between}
+.wz-card-footer.locked{background:#f0eeff}
+.wz-footer-info{font-size:12px;color:#888}
+.wz-footer-info strong{color:#12001f;font-weight:800}
+.wz-footer-info .wz-envio{color:#22A835;font-size:11px;font-weight:700}
+.wz-btn-add{background:#7F77DD;color:white;border:none;border-radius:20px;padding:9px 18px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+.wz-btn-add:hover{background:#534AB7}
+.wz-btn-add:disabled{background:#ddd;color:#aaa;cursor:not-allowed}
+
+#wz-individual{margin-top:28px;padding-top:24px;border-top:1px solid #f0eeff}
+#wz-individual-title{font-family:Anton,sans-serif;font-size:16px;letter-spacing:.05em;text-transform:uppercase;color:#12001f;margin-bottom:6px}
+#wz-individual-sub{font-size:12px;color:#888;line-height:1.5;margin-bottom:20px}
+.wz-ind-section{margin-bottom:24px}
+.wz-ind-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:#888;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.wz-ind-label::after{content:'';flex:1;height:.5px;background:#e0e0e0}
+
+#wizard-add-btn{width:100%;background:#fff;border:2px dashed #ede9ff;border-radius:16px;padding:16px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:border-color .2s;font-family:'Nunito',sans-serif}
+#wizard-add-btn:hover{border-color:#7F77DD}
+#wizard-add-icon{width:36px;height:36px;background:#f0eeff;border-radius:50%;font-size:20px;color:#7F77DD;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:300}
+#wizard-add-title{font-size:14px;font-weight:800;color:#12001f;text-align:left}
+#wizard-add-sub{font-size:11px;color:#888;text-align:left;margin-top:2px}
+
+/* ══ CAT INTRO ══ */
+#cat-intro{background:linear-gradient(135deg,#12001f 0%,#2d1b3d 60%,#1a2d1a 100%);padding:40px 32px;margin:-24px -16px 32px;position:relative;overflow:hidden}
+#cat-intro::before{content:'GUARDIA NOCTURNA';position:absolute;bottom:-10px;left:0;right:0;font-family:Anton,sans-serif;font-size:clamp(48px,10vw,100px);color:rgba(255,255,255,.04);letter-spacing:-.02em;text-transform:uppercase;pointer-events:none;white-space:nowrap;text-align:center}
+#cat-intro-eyebrow{display:inline-flex;background:rgba(127,119,221,.2);border:1px solid rgba(127,119,221,.4);border-radius:60px;padding:4px 14px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#a89ff0;margin-bottom:12px}
+#cat-intro-title{font-family:Anton,sans-serif;font-size:clamp(26px,5vw,42px);letter-spacing:.04em;text-transform:uppercase;color:white;margin-bottom:10px;line-height:1}
+#cat-intro-sub{font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;max-width:480px;margin-bottom:20px}
+#cat-intro-sub strong{color:white;font-weight:800}
+#cat-intro-prices{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cip-tag{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 16px;font-family:'Nunito',sans-serif}
+.cip-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:3px}
+.cip-val{font-size:16px;font-weight:900;color:white}
+.cip-plus{font-size:20px;color:rgba(255,255,255,.3);font-weight:300;flex-shrink:0}
+.cip-arrow{font-size:20px;color:rgba(255,255,255,.3);flex-shrink:0}
+.cip-combo{background:linear-gradient(135deg,#7F77DD,#534AB7);border:none;border-radius:10px;padding:10px 20px}
+.cip-combo .cip-label{color:rgba(255,255,255,.7)}
+.cip-combo .cip-val{font-size:20px;color:white}
+.cip-envio{font-size:10px;color:#2ECC40;font-weight:700;margin-top:2px}
+@media(max-width:640px){
+  #cat-intro{padding:32px 20px;margin:-24px -16px 28px}
+  #cat-intro-prices{flex-direction:column;align-items:stretch;gap:8px}
+  .cip-plus,.cip-arrow{display:none}
+  .cip-tag,.cip-combo{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+  .cip-val{font-size:18px}
+  .cip-combo .cip-val{font-size:20px}
+  .cip-combo{flex-direction:column;align-items:flex-start}
+}
+
+/* ══ PROMO BANNER ══ */
+#promo-banner{background:linear-gradient(135deg,#12001f 0%,#2d1b3d 100%);border-radius:16px;padding:24px 28px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;gap:20px;border:1.5px solid rgba(127,119,221,.3);position:relative;overflow:hidden}
+#promo-banner::before{content:'COMBO';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:Anton,sans-serif;font-size:120px;color:rgba(255,255,255,.03);letter-spacing:-.02em;pointer-events:none;white-space:nowrap}
+#promo-tag{display:inline-flex;align-items:center;background:rgba(127,119,221,.2);border:1px solid rgba(127,119,221,.4);border-radius:60px;padding:3px 12px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#a89ff0;width:fit-content;margin-bottom:8px}
+#promo-title{font-family:Anton,sans-serif;font-size:20px;letter-spacing:.05em;text-transform:uppercase;color:white;margin-bottom:6px}
+#promo-desc{font-size:13px;color:rgba(255,255,255,.6);line-height:1.6}
+#promo-desc strong{color:white;font-weight:800}
+#promo-saving{font-size:11px;color:rgba(46,204,64,.8);font-weight:600}
+#promo-right{flex-shrink:0;text-align:center}
+#promo-price-wrap{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 24px;display:flex;flex-direction:column;align-items:center;gap:4px}
+#promo-old{font-size:12px;color:rgba(255,255,255,.35);text-decoration:line-through;font-weight:600}
+#promo-new{font-family:Anton,sans-serif;font-size:36px;color:white;letter-spacing:.03em;line-height:1}
+#promo-envio{background:rgba(46,204,64,.15);color:#2ECC40;border:1px solid rgba(46,204,64,.3);border-radius:60px;padding:3px 12px;font-size:11px;font-weight:700;margin-top:4px}
+/* nota combo en carrito */
+.combo-nota{background:rgba(127,119,221,.1);border:1px solid rgba(127,119,221,.25);border-radius:8px;padding:8px 10px;font-size:11px;color:#a89ff0;font-weight:600;margin-bottom:12px;text-align:center}
+@media(max-width:640px){#promo-banner{flex-direction:column}#promo-right{width:100%}#promo-price-wrap{flex-direction:row;gap:12px;justify-content:center;align-items:center}}
+#hero-main{background:#fff;display:grid;grid-template-columns:1fr 1fr;min-height:560px;overflow:hidden}
+#hero-content{padding:56px 48px 48px;display:flex;flex-direction:column;justify-content:center;gap:20px}
+#hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:#f0eeff;border:1px solid rgba(127,119,221,.2);border-radius:60px;padding:5px 14px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#7F77DD;width:fit-content}
+#hero-headline{font-family:Nunito,sans-serif;font-size:clamp(32px,4vw,52px);font-weight:900;color:#12001f;line-height:1.1;letter-spacing:-.02em}
+#hero-accent{color:#7F77DD}
+#hero-sub{font-size:15px;color:#555;line-height:1.7;max-width:440px}
+#hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
+.hero-btn-primary{background:#7F77DD;color:white;border:none;border-radius:60px;padding:14px 28px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .18s;text-decoration:underline}
+.hero-btn-primary:hover{background:#534AB7;transform:translateY(-2px)}
+.hero-btn-secondary{background:transparent;color:#12001f;border:1.5px solid #ddd;border-radius:60px;padding:13px 24px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .18s}
+.hero-btn-secondary:hover{border-color:#7F77DD;color:#7F77DD}
+#hero-metrics{display:flex;align-items:center;gap:0;background:#f8f7ff;border:1px solid #ede9ff;border-radius:14px;padding:16px 20px;margin-top:8px;width:fit-content}
+.hm-item{display:flex;flex-direction:column;align-items:center;padding:0 16px}
+.hm-val{font-family:Nunito,sans-serif;font-size:20px;font-weight:900;color:#12001f;line-height:1}
+.hm-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#888;margin-top:3px}
+.hm-div{width:1px;height:32px;background:#e0daff}
+#hero-img-wrap{position:relative;overflow:hidden;background:#e8eef5}
+#hero-img{width:100%;height:100%;object-fit:cover;object-position:center top}
+
+/* ══ TRUST BAR ══ */
+#trust-bar{background:#12001f;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.tb-item{display:flex;align-items:center;gap:12px;padding:18px 20px;border-right:1px solid rgba(255,255,255,.07)}
+.tb-item:last-child{border-right:none}
+.tb-icon{font-size:18px;flex-shrink:0;width:32px;text-align:center}
+.tb-title{font-size:12px;font-weight:700;color:white;margin-bottom:2px}
+.tb-sub{font-size:10px;color:rgba(255,255,255,.45);font-weight:500}
+@media(max-width:700px){#hero-main{grid-template-columns:1fr}#hero-img-wrap{height:300px}#hero-content{padding:36px 24px 32px}#trust-bar{grid-template-columns:1fr 1fr}}
+
+/* ══ HERO ══ */
+#hero{background:#12001f;overflow:hidden;position:relative}
+#hero-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:clamp(80px,22vw,240px);color:white;opacity:.05;letter-spacing:-.03em;text-transform:uppercase;pointer-events:none;user-select:none;white-space:nowrap;z-index:0}
+#stage{position:relative;z-index:5;display:grid;grid-template-columns:1fr 1fr;height:300px}
+.lane{position:relative;overflow:hidden;cursor:pointer;border-top:1px solid rgba(255,255,255,.07);transition:background-color 500ms ease}
+.lane-left{border-right:1px solid rgba(255,255,255,.1)}
+.lane-label{position:absolute;top:12px;left:0;right:0;text-align:center;z-index:20;font-size:9px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:'Nunito',sans-serif;pointer-events:none}
+.prenda-stage{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:48px}
+.prenda-nombre{font-family:Anton,sans-serif;font-size:clamp(12px,2vw,15px);letter-spacing:.08em;text-transform:uppercase;color:white;opacity:.9;margin-top:8px;text-align:center;padding:0 6px}
+.prenda-ref{font-size:10px;font-weight:600;letter-spacing:.18em;color:rgba(255,255,255,.4);text-align:center;margin-top:2px;font-family:'Nunito',sans-serif}
+.lane-arrows{position:absolute;bottom:12px;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:center;gap:8px}
+.arw{width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.07);color:white;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 150ms,transform 120ms}
+.arw:hover{background:rgba(255,255,255,.2);transform:scale(1.1)}
+.lane-dots{position:absolute;bottom:52px;left:0;right:0;display:flex;justify-content:center;gap:5px;z-index:20}
+.ldot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.25);transition:background 250ms,transform 250ms}
+.ldot.on{background:white;transform:scale(1.3)}
+@keyframes popIn{0%{transform:scale(.72) translateY(10px);opacity:0}100%{transform:scale(1) translateY(0);opacity:1}}
+.prenda-svg.pop{animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
+
+/* ══ CATÁLOGO ══ */
+#catalogo{background:#ffffff;padding:24px 16px 0}
+.cat-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
+.cat-title{font-family:Anton,sans-serif;font-size:20px;letter-spacing:.06em;text-transform:uppercase;color:#12001f}
+.combo-pill{background:rgba(46,204,64,.12);border:1px solid rgba(46,204,64,.3);color:#22A835;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.cat-section{margin-bottom:24px}
+.cat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:#888;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.cat-label::after{content:'';flex:1;height:.5px;background:#e0e0e0}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px}
+.prod-card{background:#f4f2fa;border-radius:14px;overflow:hidden;border:1.5px solid transparent;transition:border-color 200ms,transform 150ms;position:relative;cursor:pointer}
+.prod-card:hover{transform:translateY(-3px)}
+.prod-card.in-cart{border-color:#7F77DD}
+.prod-vis{height:100px;display:flex;align-items:center;justify-content:center;padding:10px;position:relative}
+.prod-vis svg{height:70px;width:auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.3))}
+.padd-hover{position:absolute;bottom:8px;right:8px;background:rgba(127,119,221,.9);color:white;font-size:10px;font-weight:700;font-family:'Nunito',sans-serif;padding:4px 10px;border-radius:20px;opacity:0;transform:translateY(4px);transition:opacity 150ms,transform 150ms;pointer-events:none}
+.prod-card:hover .padd-hover{opacity:1;transform:translateY(0)}
+.prod-body{padding:8px 10px 10px}
+.prod-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#12001f;margin-bottom:2px}
+.prod-price{font-size:12px;color:#666;margin-bottom:8px}
+.prod-actions{display:flex;align-items:center;gap:6px}
+.size-sel{flex:1;height:30px;font-size:11px;border-radius:6px;border:.5px solid #ddd;background:#fff;color:#12001f;padding:0 6px;cursor:pointer;font-family:'Nunito',sans-serif}
+.btn-add{height:30px;padding:0 10px;background:#7F77DD;color:white;border:none;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background 150ms,transform 100ms;font-family:'Nunito',sans-serif}
+.btn-add:hover{background:#534AB7}
+.btn-add:active{transform:scale(.95)}
+.combo-hint-badge{background:linear-gradient(135deg,#7F77DD,#534AB7);color:white;font-size:10px;font-weight:700;font-family:'Nunito',sans-serif;padding:5px 10px;text-align:center;letter-spacing:.02em;animation:pulseBar 2s infinite}
+@keyframes pulseBar{0%,100%{opacity:1}50%{opacity:.75}}
+.cart-qty-badge{position:absolute;top:8px;right:8px;background:#7F77DD;color:white;font-size:10px;font-weight:800;width:20px;height:20px;border-radius:50%;display:none;align-items:center;justify-content:center;font-family:'Nunito',sans-serif}
+.prod-card.in-cart .cart-qty-badge{display:flex}
+
+/* ══ MODAL PRODUCTO ══ */
+.pij-overlay{display:none;position:fixed;inset:0;background:rgba(5,0,15,.75);z-index:700;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px}
+.pij-overlay.on{display:flex}
+.pij-modal{background:#12001f;border:1px solid rgba(255,255,255,.12);border-radius:20px;max-width:680px;width:100%;display:grid;grid-template-columns:1fr 1fr;max-height:90vh;overflow:hidden;position:relative;animation:mPop .28s cubic-bezier(.34,1.4,.64,1)}
+@keyframes mPop{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+.pij-modal-x{position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:50%;width:30px;height:30px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);transition:all .15s}
+.pij-modal-x:hover{background:rgba(255,255,255,.18);color:white}
+.pij-modal-vis{display:flex;align-items:center;justify-content:center;min-height:300px;border-right:1px solid rgba(255,255,255,.08)}
+.pij-modal-body{padding:28px 24px;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
+.pij-modal-tag{font-size:9px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#7F77DD}
+.pij-modal-name{font-family:Anton,sans-serif;font-size:22px;letter-spacing:.06em;text-transform:uppercase;color:white;line-height:1.1}
+.pij-modal-feats{list-style:none;display:flex;flex-direction:column;gap:5px;margin-top:4px}
+.pij-modal-feats li{font-size:12px;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:7px}
+.pij-modal-feats li::before{content:'✓';color:#2ECC40;font-weight:800;font-size:11px}
+.pij-price{font-family:Anton,sans-serif;font-size:26px;color:white;letter-spacing:.04em}
+.pij-modal-size-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.45);margin-bottom:6px}
+.pij-size-btns{display:flex;gap:6px;flex-wrap:wrap}
+.pij-sz{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;width:40px;height:36px;border-radius:8px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
+.pij-sz.on{background:#7F77DD;border-color:#7F77DD;color:white}
+.pij-sz:hover:not(.on){border-color:#7F77DD;color:white}
+.pij-qty-ctrl{display:flex;align-items:center;border:1.5px solid rgba(255,255,255,.15);border-radius:20px;overflow:hidden;width:fit-content;margin-top:4px}
+.pij-qb{background:transparent;border:none;width:36px;height:36px;font-size:18px;cursor:pointer;color:white;display:flex;align-items:center;justify-content:center;transition:background .12s}
+.pij-qb:hover{background:rgba(255,255,255,.1)}
+.pij-qn{width:36px;height:36px;line-height:36px;text-align:center;font-weight:700;font-size:15px;color:white;border-left:.5px solid rgba(255,255,255,.15);border-right:.5px solid rgba(255,255,255,.15)}
+.pij-modal-actions{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.pij-btn-add{background:#7F77DD;color:white;border:none;border-radius:20px;padding:13px 18px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:6px}
+.pij-btn-add:hover{background:#534AB7;transform:translateY(-1px)}
+.pij-btn-buy{background:#2ECC40;color:white;border:none;border-radius:20px;padding:13px 18px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:6px}
+.pij-btn-buy:hover{background:#22A835;transform:translateY(-1px)}
+@media(max-width:540px){.pij-modal{grid-template-columns:1fr}.pij-modal-vis{min-height:180px;border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}}
+
+/* ══ FAB ══ */
+#pij-fab{position:fixed;bottom:28px;right:28px;z-index:600;background:#12001f;color:white;border:1.5px solid rgba(127,119,221,.5);border-radius:20px;padding:12px 20px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .2s cubic-bezier(.34,1.4,.64,1);box-shadow:0 6px 28px rgba(0,0,0,.4)}
+#pij-fab:hover{background:#12001f;border-color:#7F77DD;transform:translateY(-3px)}
+#pij-fab-n{background:#7F77DD;color:white;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;transition:transform .3s cubic-bezier(.34,1.6,.64,1)}
+#pij-fab-n.bump{transform:scale(1.6)}
+#pij-fab-total{font-size:12px;color:rgba(255,255,255,.55)}
+
+/* ══ CART DRAWER ══ */
+.pij-cart-overlay{position:fixed;inset:0;z-index:598;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s ease}
+.pij-cart-overlay.on{opacity:1;pointer-events:all}
+.pij-cpanel{position:fixed;top:0;right:0;bottom:0;z-index:599;width:400px;max-width:100vw;background:#12001f;border-left:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .32s cubic-bezier(.32,0,.22,1)}
+.pij-cpanel.on{transform:translateX(0)}
+.pij-cp-head{padding:18px 20px 14px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;background:#12001f}
+.pij-cp-title{font-family:Anton,sans-serif;font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:white}
+.pij-cp-sub{font-size:10px;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+.pij-cp-close{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);transition:all .14s}
+.pij-cp-close:hover{background:rgba(255,255,255,.18);color:white}
+.pij-cp-items{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.pij-cp-items::-webkit-scrollbar{width:3px}
+.pij-cp-items::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:3px}
+.pij-cp-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:48px 24px;text-align:center;color:rgba(255,255,255,.35);min-height:280px}
+.pij-cp-empty span{font-size:40px;display:block;margin-bottom:14px;opacity:.4}
+.pij-cp-empty p{font-size:13px;line-height:1.6;margin-bottom:18px}
+.pij-cp-empty-cta{background:rgba(127,119,221,.15);color:#7F77DD;border:1px solid rgba(127,119,221,.3);border-radius:20px;padding:9px 20px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s}
+.pij-cp-empty-cta:hover{background:rgba(127,119,221,.25)}
+.pij-ci{display:grid;grid-template-columns:60px 1fr auto;gap:10px;align-items:start;padding:12px;background:rgba(255,255,255,.04);border-radius:12px;border:1px solid rgba(255,255,255,.07);animation:ciIn .2s ease}
+@keyframes ciIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
+.pij-ci-vis{width:60px;height:60px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(255,255,255,.08)}
+.pij-ci-name{font-size:13px;font-weight:700;color:white;margin-bottom:2px}
+.pij-ci-detail{font-size:10px;color:rgba(255,255,255,.4);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.pij-ci-row{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.pij-cqb{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;width:24px;height:24px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;transition:all .12s}
+.pij-cqb:hover{background:#7F77DD;border-color:#7F77DD}
+.pij-cqn{font-size:13px;font-weight:800;min-width:20px;text-align:center;color:white}
+.pij-ci-subtotal{font-size:14px;font-weight:800;color:white}
+.pij-ci-del{background:transparent;border:none;color:rgba(255,255,255,.25);font-size:16px;cursor:pointer;padding:4px;transition:color .12s;line-height:1;align-self:start}
+.pij-ci-del:hover{color:#ff6b6b}
+.pij-cp-summary{padding:12px 16px;border-top:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);flex-shrink:0}
+.pij-sum-row{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.45);font-weight:600;margin-bottom:5px}
+.pij-sum-row.combo{color:#2ECC40}
+.pij-sum-row.total{font-size:13px;font-weight:700;color:rgba(255,255,255,.8);border-top:.5px solid rgba(255,255,255,.1);padding-top:8px;margin-top:4px;margin-bottom:0}
+.pij-sum-row.total .pij-sum-val{font-family:Anton,sans-serif;font-size:20px;color:white;letter-spacing:.04em}
+.pij-cp-foot{padding:14px 16px 18px;border-top:.5px solid rgba(255,255,255,.08);flex-shrink:0}
+.pij-cp-pay{background:#7F77DD;color:white;border:none;border-radius:20px;padding:14px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-bottom:8px}
+.pij-cp-pay:hover{background:#534AB7;transform:translateY(-1px)}
+.pij-cp-contra{background:transparent;border:1.5px solid rgba(255,255,255,.15);border-radius:20px;padding:11px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);cursor:pointer;transition:all .14s;display:flex;align-items:center;justify-content:center;gap:6px;width:100%}
+.pij-cp-contra:hover{border-color:rgba(255,255,255,.35);color:white}
+.pij-secure{display:flex;align-items:center;justify-content:center;gap:5px;font-size:10px;color:rgba(255,255,255,.25);margin-top:10px}
+
+/* ══ CHECKOUT MODAL ══ */
+.pij-co-overlay{display:none;position:fixed;inset:0;background:rgba(5,0,15,.8);z-index:800;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px}
+.pij-co-overlay.on{display:flex}
+.pij-co-box{background:#12001f;border:1px solid rgba(255,255,255,.12);border-radius:20px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto;padding:28px 24px;animation:mPop .28s cubic-bezier(.34,1.4,.64,1);position:relative}
+.pij-co-x{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:50%;width:28px;height:28px;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);transition:all .15s}
+.pij-co-x:hover{color:white;background:rgba(255,255,255,.15)}
+.pij-co-tag{font-size:9px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#7F77DD;margin-bottom:6px}
+.pij-co-title{font-family:Anton,sans-serif;font-size:20px;letter-spacing:.06em;text-transform:uppercase;color:white;margin-bottom:4px}
+.pij-co-sub{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:20px;line-height:1.5}
+.pij-co-notice{background:rgba(46,204,64,.08);border:1px solid rgba(46,204,64,.2);border-radius:10px;padding:10px 14px;font-size:11px;color:#2ECC40;font-weight:600;margin-bottom:16px;line-height:1.5}
+.pij-fgrid{display:flex;flex-direction:column;gap:12px}
+.pij-fg label{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.45);margin-bottom:5px}
+.pij-fg input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:11px 14px;font-family:'Nunito',sans-serif;font-size:13px;color:white;outline:none;transition:border-color .15s}
+.pij-fg input:focus{border-color:#7F77DD}
+.pij-fg input::placeholder{color:rgba(255,255,255,.25)}
+.pij-co-resumen{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;margin:16px 0}
+.pij-co-res-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-bottom:8px}
+.pij-co-res-item{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:3px}
+.pij-co-res-total{font-size:15px;font-weight:800;color:white;margin-top:8px;padding-top:8px;border-top:.5px solid rgba(255,255,255,.1)}
+.pij-co-submit{background:#7F77DD;color:white;border:none;border-radius:20px;padding:14px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;width:100%;margin-bottom:8px}
+.pij-co-submit:hover{background:#534AB7}
+.pij-co-cancel{background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:11px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;color:rgba(255,255,255,.45);cursor:pointer;width:100%;transition:border-color .15s}
+.pij-co-cancel:hover{border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7)}
+</style>
+
+<h2 class="sr-only">Tienda Pijamas Sustancia P — elige tus prendas, tallas y cantidad</h2>
+
+<!-- ══ TOP BAR ══ -->
+<div id="top-bar">
+  <span class="top-bar-pill">Nuevo</span>
+  🌙 Envío gratis para toda Colombia — <a href="#catalogo">Ver colección →</a>
+</div>
+
+<!-- ══ HEADER ══ -->
+<header id="site-header">
+  <a href="#" id="hdr-logo">
+    <div id="hdr-logo-mark">SP</div>
+    <div style="display:flex;flex-direction:column;gap:0">
+      <span id="hdr-logo-name">Pijamas</span>
+      <span id="hdr-logo-sub">por Sustancia P</span>
+    </div>
+  </a>
+  <nav id="hdr-nav">
+    <a href="#catalogo">Camisetas</a>
+    <a href="#catalogo">Pantalones</a>
+    <a href="#catalogo">Combos</a>
+    <a href="#catalogo">Cómo comprar</a>
+  </nav>
+  <button id="hdr-cart-btn" onclick="toggleCart()">
+    🛒 Mi pedido
+    <span id="hdr-cart-count">0</span>
+  </button>
+</header>
+
+<!-- ══ HERO ══ -->
+<div id="hero">
+  <div id="hero-bg">PIJAMAS</div>
+  <div id="stage">
+    <div class="lane lane-left" id="lane-top">
+      <div class="lane-label">CAMISETAS</div>
+      <div class="prenda-stage">
+        <div id="top-svg-wrap"></div>
+        <div class="prenda-nombre" id="top-nombre">Camiseta Neuro</div>
+        <div class="prenda-ref" id="top-ref">REF 01 · $89.900</div>
+      </div>
+      <div class="lane-dots" id="dots-top"></div>
+      <div class="lane-arrows">
+        <button class="arw" id="ta-p">&#8592;</button>
+        <button class="arw" id="ta-n">&#8594;</button>
+      </div>
+    </div>
+    <div class="lane" id="lane-pants">
+      <div class="lane-label">PANTALONES</div>
+      <div class="prenda-stage">
+        <div id="pants-svg-wrap"></div>
+        <div class="prenda-nombre" id="pants-nombre">Pantalón Neuro</div>
+        <div class="prenda-ref" id="pants-ref">REF 01 · $79.900</div>
+      </div>
+      <div class="lane-dots" id="dots-pants"></div>
+      <div class="lane-arrows">
+        <button class="arw" id="pa-p">&#8592;</button>
+        <button class="arw" id="pa-n">&#8594;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CATÁLOGO ══ -->
+<div id="catalogo">
+  <div id="cat-intro">
+    <div id="cat-intro-eyebrow">· Colección Guardia Nocturna ·</div>
+    <div id="cat-intro-title">Arma tu Guardia Nocturna</div>
+    <div id="cat-intro-sub">Combina cualquier camiseta con cualquier pantalón. El combo sale <strong>$99.900 con envío incluido</strong> a toda Colombia.</div>
+    <div id="cat-intro-prices">
+      <div class="cip-tag">
+        <div class="cip-label">Camiseta</div>
+        <div class="cip-val">$45.000</div>
+      </div>
+      <div class="cip-plus">+</div>
+      <div class="cip-tag">
+        <div class="cip-label">Pantalón</div>
+        <div class="cip-val">$70.000</div>
+      </div>
+      <div class="cip-arrow">→</div>
+      <div class="cip-tag cip-combo">
+        <div class="cip-label">Combo · envío incluido</div>
+        <div class="cip-val">$99.900</div>
+        <div class="cip-envio">📦 Ahorras $25.100</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-section desktop-only">
+    <div class="cat-label">Camisetas — $45.000 c/u</div>
+    <div class="prod-grid" id="grid-tops"></div>
+  </div>
+
+  <div class="cat-section desktop-only">
+    <div class="cat-label">Pantalones — $70.000 c/u</div>
+    <div class="prod-grid" id="grid-pants"></div>
+  </div>
+
+  <!-- ══ WIZARD MÓVIL ══ -->
+  <div id="wizard" class="mobile-only">
+    <!-- Combos armados -->
+    <div id="wizard-combos"></div>
+    <!-- Botón agregar combo -->
+    <button id="wizard-add-btn" onclick="wizardNew()">
+      <span id="wizard-add-icon">＋</span>
+      <div>
+        <div id="wizard-add-title">Armar otro combo</div>
+        <div id="wizard-add-sub">Camiseta + Pantalón · $99.900 con envío</div>
+      </div>
+    </button>
+
+    <!-- Prendas individuales -->
+    <div id="wz-individual">
+      <div id="wz-individual-title">¿Solo una prenda?</div>
+      <div id="wz-individual-sub">También puedes llevar camiseta o pantalón por separado. El envío se cobra aparte ($10.000).</div>
+      <div class="wz-ind-section">
+        <div class="wz-ind-label">Camisetas — $45.000 c/u</div>
+        <div class="prod-grid" id="grid-tops-mobile"></div>
+      </div>
+      <div class="wz-ind-section">
+        <div class="wz-ind-label">Pantalones — $70.000 c/u</div>
+        <div class="prod-grid" id="grid-pants-mobile"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL PRODUCTO ══ -->
+<div class="pij-overlay" id="pij-ov" onclick="closeMIfBg(event)">
+  <div class="pij-modal">
+    <button class="pij-modal-x" onclick="closeM()">×</button>
+    <div class="pij-modal-vis" id="pij-mVis"></div>
+    <div class="pij-modal-body">
+      <div class="pij-modal-tag" id="pij-mTag">Colección Pijamas</div>
+      <div class="pij-modal-name" id="pij-mName">Camiseta Neuro</div>
+      <ul class="pij-modal-feats">
+        <li>Tela suave 100% algodón</li>
+        <li>Diseño anatómico exclusivo</li>
+        <li>Costuras reforzadas</li>
+        <li>Tallas S — XL</li>
+      </ul>
+      <div class="pij-price" id="pij-mPrice">$89.900</div>
+      <div>
+        <div class="pij-modal-size-label">Talla</div>
+        <div class="pij-size-btns" id="pij-mSizes"></div>
+      </div>
+      <div class="pij-qty-ctrl">
+        <button class="pij-qb" onclick="adjMQ(-1)">−</button>
+        <div class="pij-qn" id="pij-mQty">1</div>
+        <button class="pij-qb" onclick="adjMQ(1)">+</button>
+      </div>
+      <div class="pij-modal-actions">
+        <button class="pij-btn-add" onclick="addFromModal()">🛒 Agregar al carrito</button>
+        <button class="pij-btn-buy" onclick="buyNow()">⚡ Realizar compra</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FAB ══ -->
+<button id="pij-fab" onclick="toggleCart()">
+  🛒 Carrito
+  <span id="pij-fab-n">0</span>
+  <span id="pij-fab-total" style="display:none"></span>
+</button>
+
+<!-- ══ CART OVERLAY ══ -->
+<div class="pij-cart-overlay" id="pij-cart-overlay" onclick="closePanel()"></div>
+
+<!-- ══ CART PANEL ══ -->
+<div class="pij-cpanel" id="pij-cpanel">
+  <div class="pij-cp-head">
+    <div>
+      <div class="pij-cp-title">🛒 Tu pedido</div>
+      <div class="pij-cp-sub" id="pij-cp-sub">0 artículos</div>
+    </div>
+    <button class="pij-cp-close" onclick="closePanel()">×</button>
+  </div>
+  <div class="pij-cp-items" id="pij-cp-items">
+    <div class="pij-cp-empty">
+      <span>🌙</span>
+      <p>Tu carrito está vacío.<br>¡Elige tu pijama!</p>
+      <button class="pij-cp-empty-cta" onclick="closePanel();document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">Ver catálogo →</button>
+    </div>
+  </div>
+  <div class="pij-cp-summary" id="pij-cp-summary" style="display:none">
+    <div class="pij-sum-row"><span>Subtotal</span><span class="pij-sum-val" id="pij-sum-sub">$0</span></div>
+    <div class="pij-sum-row combo" id="pij-sum-combo-row" style="display:none"><span>🎁 Combo Pijama Completa · envío incluido</span><span class="pij-sum-val" id="pij-sum-combo">−$0</span></div>
+    <div class="pij-sum-row"><span>Envío</span><span class="pij-sum-val" id="pij-sum-envio-val" style="color:#2ECC40">Gratis 🎉</span></div>
+    <div class="pij-sum-row total"><span>Total</span><span class="pij-sum-val" id="pij-sum-total">$0</span></div>
+  </div>
+  <div class="pij-cp-foot" id="pij-cp-foot" style="display:none">
+    <div class="combo-nota" id="pij-combo-nota" style="display:none"></div>
+    <button class="pij-cp-pay" onclick="openCo(false)">⚡ Pagar con Wompi</button>
+    <button class="pij-cp-contra" onclick="openCo(true)">📦 Pagar contraentrega <span style="font-size:10px;opacity:.6">(+$5.000)</span></button>
+    <div class="pij-secure">🔒 Pago seguro · SSL · Wompi · Nequi · PSE</div>
+  </div>
+</div>
+
+<!-- ══ CHECKOUT ══ -->
+<div class="pij-co-overlay" id="pij-co-ov" onclick="closeCoIfBg(event)">
+  <div class="pij-co-box">
+    <button class="pij-co-x" onclick="closeCo()">×</button>
+    <div class="pij-co-tag">Pago seguro · Sustancia P</div>
+    <div class="pij-co-title" id="pij-co-title">Finalizar pedido</div>
+    <div class="pij-co-sub" id="pij-co-sub">Completa tus datos para continuar.</div>
+    <div class="pij-co-notice" id="pij-co-notice" style="display:none">Los pedidos contraentrega tienen un recargo de <strong>$5.000</strong>. Se paga al momento de la entrega.</div>
+    <div class="pij-fgrid">
+      <div class="pij-fg"><label>Nombre completo</label><input id="co-nombre" type="text" placeholder="Tu nombre"></div>
+      <div class="pij-fg"><label>WhatsApp (para guía de rastreo)</label><input id="co-cel" type="tel" placeholder="300 000 0000"></div>
+      <div class="pij-fg"><label>Correo electrónico</label><input id="co-email" type="email" placeholder="correo@ejemplo.com"></div>
+      <div class="pij-fg"><label>Ciudad y dirección de entrega</label><input id="co-dir" type="text" placeholder="Ciudad · Dirección completa"></div>
+    </div>
+    <div class="pij-co-resumen" id="pij-co-resumen"></div>
+    <div style="margin-top:16px">
+      <button class="pij-co-submit" id="pij-co-submit">Confirmar pedido →</button>
+      <button class="pij-co-cancel" onclick="closeCo()">Volver al carrito</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+var M={
+  neuro_top:'<ellipse cx="60" cy="58" rx="14" ry="10" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/><line x1="60" y1="48" x2="60" y2="42" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/><line x1="74" y1="58" x2="80" y2="56" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/><line x1="46" y1="58" x2="40" y2="56" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>',
+  cardio_top:'<path d="M51 52 Q51 46 57 46 Q60 46 60 50 Q60 46 63 46 Q69 46 69 52 Q69 58 60 65 Q51 58 51 52Z" fill="rgba(255,255,255,.28)"/>',
+  mix_top:'<circle cx="60" cy="57" r="10" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/><line x1="60" y1="47" x2="60" y2="67" stroke="rgba(255,255,255,.2)" stroke-width="1"/><line x1="50" y1="57" x2="70" y2="57" stroke="rgba(255,255,255,.2)" stroke-width="1"/>',
+  neuro_pants:'<circle cx="30" cy="42" r="5" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.2"/><circle cx="80" cy="42" r="5" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.2"/>',
+  cardio_pants:'<path d="M24 38 Q24 34 27 34 Q30 34 30 37 Q30 34 33 34 Q36 34 36 38 Q36 42 30 46 Q24 42 24 38Z" fill="rgba(255,255,255,.22)"/><path d="M74 38 Q74 34 77 34 Q80 34 80 37 Q80 34 83 34 Q86 34 86 38 Q86 42 80 46 Q74 42 74 38Z" fill="rgba(255,255,255,.22)"/>',
+  mix_pants:'<circle cx="35" cy="60" r="4" fill="rgba(255,255,255,.15)"/><circle cx="75" cy="60" r="4" fill="rgba(255,255,255,.15)"/>'
+};
+function svgTop(c,m,h){h=h||110;return'<svg style="height:'+h+'px;width:auto" viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg"><path d="M30 10 L10 30 L25 35 L22 100 L98 100 L95 35 L110 30 L90 10 Q75 18 60 18 Q45 18 30 10Z" fill="'+c+'" stroke="rgba(255,255,255,.4)" stroke-width="2.5" stroke-linejoin="round"/><path d="M60 18 Q52 22 47 30 L60 28 L73 30 Q68 22 60 18Z" fill="rgba(255,255,255,.12)"/>'+m+'</svg>';}
+function svgPants(c,m,h){h=h||130;return'<svg style="height:'+h+'px;width:auto" viewBox="0 0 110 130" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="8" width="90" height="22" rx="4" fill="'+c+'" stroke="rgba(255,255,255,.4)" stroke-width="2"/><path d="M10 28 L10 75 Q10 105 35 118 L55 118 L55 65 L55 118 L75 118 Q100 105 100 75 L100 28Z" fill="'+c+'" stroke="rgba(255,255,255,.4)" stroke-width="2.5" stroke-linejoin="round"/><line x1="55" y1="28" x2="55" y2="118" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>'+m+'</svg>';}
+
+var TOPS=[
+  {id:"t1",name:"Camiseta Neuro",  price:45000,bg:"#2d1b3d",color:"#3d2550",ref:"REF 01",type:"top",cat:"Camisetas",m:M.neuro_top},
+  {id:"t2",name:"Camiseta Cardio", price:45000,bg:"#1a1a2e",color:"#1a1a2e",ref:"REF 02",type:"top",cat:"Camisetas",m:M.cardio_top},
+  {id:"t3",name:"Camiseta Mix",    price:45000,bg:"#2d1b3d",color:"#2d1b3d",ref:"REF 03",type:"top",cat:"Camisetas",m:M.mix_top}
+];
+var PANTS=[
+  {id:"p1",name:"Pantalón Neuro",  price:70000,bg:"#2d1b3d",color:"#3d2550",ref:"REF 01",type:"pants",cat:"Pantalones",m:M.neuro_pants},
+  {id:"p2",name:"Pantalón Cardio", price:70000,bg:"#1a1a2e",color:"#1a1a2e",ref:"REF 02",type:"pants",cat:"Pantalones",m:M.cardio_pants},
+  {id:"p3",name:"Pantalón Mix",    price:70000,bg:"#2d1b3d",color:"#2d1b3d",ref:"REF 03",type:"pants",cat:"Pantalones",m:M.mix_pants}
+];
+var SIZES=["S","M","L","XL"];
+var cart=[];
+var tI=0,pI=0,tAn=false,pAn=false;
+function fmt(n){return"$"+Math.round(n).toLocaleString("es-CO");}
+
+/* ── HERO ── */
+function buildDots(id,items,a){var c=document.getElementById(id);c.innerHTML="";items.forEach(function(_,i){var d=document.createElement("div");d.className="ldot"+(i===a?" on":"");c.appendChild(d);});}
+buildDots("dots-top",TOPS,0);buildDots("dots-pants",PANTS,0);
+function renderLane(type,idx){
+  var items=type==="top"?TOPS:PANTS,item=items[idx];
+  var wrap=document.getElementById(type+"-svg-wrap");
+  var html=type==="top"?svgTop(item.color,item.m,130):svgPants(item.color,item.m,130);
+  wrap.innerHTML=html;
+  var s=wrap.querySelector("svg");if(s){s.style.filter="drop-shadow(0 10px 28px rgba(0,0,0,.55))";s.className="prenda-svg pop";}
+  document.getElementById(type+"-nombre").textContent=item.name;
+  document.getElementById(type+"-ref").textContent=item.ref+" · "+fmt(item.price);
+  document.getElementById("lane-"+type).style.backgroundColor=item.bg;
+  buildDots(type==="top"?"dots-top":"dots-pants",items,idx);
+}
+renderLane("top",0);renderLane("pants",0);
+function navT(d){if(tAn)return;tAn=true;tI=d==="n"?(tI+1)%TOPS.length:(tI+TOPS.length-1)%TOPS.length;renderLane("top",tI);setTimeout(function(){tAn=false;},450);}
+function navP(d){if(pAn)return;pAn=true;pI=d==="n"?(pI+1)%PANTS.length:(pI+PANTS.length-1)%PANTS.length;renderLane("pants",pI);setTimeout(function(){pAn=false;},450);}
+document.getElementById("ta-p").onclick=function(e){e.stopPropagation();navT("p");};
+document.getElementById("ta-n").onclick=function(e){e.stopPropagation();navT("n");};
+document.getElementById("pa-p").onclick=function(e){e.stopPropagation();navP("p");};
+document.getElementById("pa-n").onclick=function(e){e.stopPropagation();navP("n");};
+
+/* ── CATÁLOGO ── */
+function renderCatalog(){
+  ["tops","pants"].forEach(function(key){
+    var items=key==="tops"?TOPS:PANTS;
+    var grid=document.getElementById("grid-"+key);
+    grid.innerHTML="";
+    items.forEach(function(item){
+      var inCart=cart.some(function(c){return c.id===item.id;});
+      var totalQty=cart.filter(function(c){return c.id===item.id;}).reduce(function(s,c){return s+c.qty;},0);
+      var card=document.createElement("div");
+      card.className="prod-card"+(inCart?" in-cart":"");
+      var svgH=key==="tops"?svgTop(item.color,item.m,65):svgPants(item.color,item.m,65);
+      var badge='<div class="cart-qty-badge">'+totalQty+'</div>';
+      var opts=SIZES.map(function(s){return'<option>'+s+'</option>';}).join("");
+      var hasTops=cart.some(function(c){return c.item.type==="top";});
+      var hasPants=cart.some(function(c){return c.item.type==="pants";});
+      var showComboHint=(key==="pants"&&hasTops)||(key==="tops"&&hasPants);
+      card.innerHTML=badge
+        +(showComboHint?'<div class="combo-hint-badge">🎁 ¡Combínala!</div>':'')
+        +'<div class="prod-vis" style="background:'+item.bg+'">'+svgH+'<div class="padd-hover">Ver detalle</div></div>'
+        +'<div class="prod-body">'
+        +'<div class="prod-name">'+item.name+'</div>'
+        +'<div class="prod-price">'+fmt(item.price)+'</div>'
+        +'<div class="prod-actions">'
+        +'<select class="size-sel" id="sz-'+item.id+'">'+opts+'</select>'
+        +'<button class="btn-add" data-id="'+item.id+'">+ Agregar</button>'
+        +'</div></div>';
+      grid.appendChild(card);
+      card.querySelector(".btn-add").onclick=function(e){
+        e.stopPropagation();
+        var sz=document.getElementById("sz-"+item.id).value;
+        addToCart(item,sz);
+      };
+      card.querySelector(".size-sel").onclick=function(e){e.stopPropagation();};
+      card.onclick=function(){openModal(item);};
+    });
+  });
+}
+renderCatalog();
+
+/* ── MODAL ── */
+var mItem=null,mQty=1,mSize="S";
+function openModal(item){
+  mItem=item;mQty=1;mSize=SIZES[0];
+  document.getElementById("pij-mName").textContent=item.name;
+  document.getElementById("pij-mTag").textContent=item.cat+" · Sustancia P";
+  document.getElementById("pij-mPrice").textContent=fmt(item.price);
+  document.getElementById("pij-mQty").textContent=1;
+  var bigSvg=item.type==="top"?svgTop(item.color,item.m,160):svgPants(item.color,item.m,180);
+  var vis=document.getElementById("pij-mVis");
+  vis.style.background=item.bg;
+  vis.innerHTML='<div style="filter:drop-shadow(0 12px 32px rgba(0,0,0,.6))">'+bigSvg+'</div>';
+  var sb=document.getElementById("pij-mSizes");
+  sb.innerHTML="";
+  SIZES.forEach(function(s){
+    var b=document.createElement("button");
+    b.className="pij-sz"+(s===mSize?" on":"");
+    b.textContent=s;
+    b.onclick=function(){mSize=s;sb.querySelectorAll(".pij-sz").forEach(function(x){x.classList.remove("on");});b.classList.add("on");};
+    sb.appendChild(b);
+  });
+  document.getElementById("pij-ov").classList.add("on");
+  document.body.style.overflow="hidden";
+}
+window.closeM=function(){document.getElementById("pij-ov").classList.remove("on");document.body.style.overflow="";};
+window.closeMIfBg=function(e){if(e.target===document.getElementById("pij-ov"))closeM();};
+window.adjMQ=function(d){mQty=Math.max(1,mQty+d);document.getElementById("pij-mQty").textContent=mQty;};
+window.addFromModal=function(){
+  if(!mItem)return;
+  for(var i=0;i<mQty;i++)addToCart(mItem,mSize);
+  closeM();
+  setTimeout(function(){toggleCart();},120);
+};
+window.buyNow=function(){
+  if(!mItem)return;
+  for(var i=0;i<mQty;i++)addToCart(mItem,mSize);
+  closeM();
+  setTimeout(function(){openCo(false);},120);
+};
+
+/* ── CARRITO ── */
+function addToCart(item,size){
+  var key=item.id+"-"+size;
+  var ex=cart.find(function(c){return c.key===key;});
+  if(ex){ex.qty++;}else{cart.push({key:key,id:item.id,item:item,size:size,qty:1});}
+  renderCatalog();renderPanel();updateBubble();bumpFab();
+}
+function removeFromCart(key){cart=cart.filter(function(c){return c.key!==key;});renderCatalog();renderPanel();updateBubble();}
+function changeQty(key,delta){
+  var ex=cart.find(function(c){return c.key===key;});
+  if(!ex)return;
+  ex.qty+=delta;
+  if(ex.qty<=0)removeFromCart(key);
+  else{renderCatalog();renderPanel();updateBubble();}
+}
+
+function calcTotals(){
+  var tops=cart.filter(function(c){return c.item.type==="top";}).reduce(function(s,c){return s+c.qty;},0);
+  var pants=cart.filter(function(c){return c.item.type==="pants";}).reduce(function(s,c){return s+c.qty;},0);
+  var combos=Math.min(tops,pants);
+
+  // Prendas que NO forman combo
+  var extraTops=tops-combos;
+  var extraPants=pants-combos;
+
+  // Subtotal sin descuentos
+  var subtotal=cart.reduce(function(s,c){return s+c.item.price*c.qty;},0);
+
+  // Precio normal de las prendas que SÍ forman combo
+  var normalComboPrice=combos*(45000+70000); // $115.000 por combo
+  var discountedComboPrice=combos*99900;      // $99.900 por combo
+  var comboDisc=normalComboPrice-discountedComboPrice; // ahorro en precio
+
+  // Total después del descuento de combo
+  var totalAfterCombo=subtotal-comboDisc;
+
+  // Envío: gratis si totalAfterCombo >= $99.900, si no $10.000
+  var envio=totalAfterCombo>=99900?0:10000;
+
+  var total=totalAfterCombo+envio;
+
+  return{
+    subtotal:subtotal,
+    combos:combos,
+    comboDisc:comboDisc,
+    extraTops:extraTops,
+    extraPants:extraPants,
+    envio:envio,
+    total:total
+  };
+}
+
+function updateBubble(){
+  var total=cart.reduce(function(s,c){return s+c.qty;},0);
+  var hdr=document.getElementById("hdr-cart-count");if(hdr)hdr.textContent=total;
+  var fabN=document.getElementById("pij-fab-n");if(fabN)fabN.textContent=total;
+  var t=calcTotals();
+  var fabT=document.getElementById("pij-fab-total");
+  if(fabT){fabT.style.display=total>0?"":"none";fabT.textContent=fmt(t.total);}
+}
+
+function bumpFab(){
+  var n=document.getElementById("pij-fab-n");if(!n)return;
+  n.classList.remove("bump");void n.offsetWidth;n.classList.add("bump");
+  setTimeout(function(){n.classList.remove("bump");},400);
+}
+
+/* ── PANEL ── */
+function renderPanel(){
+  var items=document.getElementById("pij-cp-items");
+  var summary=document.getElementById("pij-cp-summary");
+  var foot=document.getElementById("pij-cp-foot");
+  var totalItems=cart.reduce(function(s,c){return s+c.qty;},0);
+  document.getElementById("pij-cp-sub").textContent=totalItems+" artículo"+(totalItems!==1?"s":"");
+  if(cart.length===0){
+    items.innerHTML='<div class="pij-cp-empty"><span>🌙</span><p>Tu carrito está vacío.<br>¡Elige tu pijama!</p><button class="pij-cp-empty-cta" onclick="closePanel();document.getElementById(\'catalogo\').scrollIntoView({behavior:\'smooth\'})">Ver catálogo →</button></div>';
+    summary.style.display="none";foot.style.display="none";return;
+  }
+  items.innerHTML="";
+  cart.forEach(function(c){
+    var row=document.createElement("div");row.className="pij-ci";
+    var miniSvg=c.item.type==="top"?svgTop(c.item.color,"",44):svgPants(c.item.color,"",50);
+    row.innerHTML='<div class="pij-ci-vis" style="background:'+c.item.bg+'">'+miniSvg+'</div>'
+      +'<div><div class="pij-ci-name">'+c.item.name+'</div>'
+      +'<div class="pij-ci-detail">Talla '+c.size+'</div>'
+      +'<div class="pij-ci-row">'
+      +'<button class="pij-cqb" data-key="'+c.key+'" data-d="-1">−</button>'
+      +'<span class="pij-cqn">'+c.qty+'</span>'
+      +'<button class="pij-cqb" data-key="'+c.key+'" data-d="1">+</button>'
+      +'</div>'
+      +'<div class="pij-ci-subtotal">'+fmt(c.item.price*c.qty)+'</div></div>'
+      +'<button class="pij-ci-del" data-key="'+c.key+'">×</button>';
+    row.querySelectorAll(".pij-cqb").forEach(function(b){b.onclick=function(){changeQty(b.dataset.key,parseInt(b.dataset.d));};});
+    row.querySelector(".pij-ci-del").onclick=function(e){removeFromCart(e.currentTarget.dataset.key);};
+    items.appendChild(row);
+  });
+  var t=calcTotals();
+  document.getElementById("pij-sum-sub").textContent=fmt(t.subtotal);
+  var cr=document.getElementById("pij-sum-combo-row");
+  if(t.combos>0){cr.style.display="flex";document.getElementById("pij-sum-combo").textContent="−"+fmt(t.comboDisc);}else{cr.style.display="none";}
+  // Envío
+  var envioRow=document.getElementById("pij-sum-envio-val");
+  if(envioRow){envioRow.textContent=t.envio===0?"Gratis 🎉":fmt(t.envio);envioRow.style.color=t.envio===0?"#2ECC40":"";}
+  document.getElementById("pij-sum-total").textContent=fmt(t.total);
+  // Nota combo
+  var notaEl=document.getElementById("pij-combo-nota");
+  if(notaEl){
+    if(t.combos>0){notaEl.style.display="block";notaEl.textContent="🎁 "+t.combos+" combo"+(t.combos>1?"s":"")+" · $99.900 c/u con envío incluido · Ahorras "+fmt(t.comboDisc);}
+    else{notaEl.style.display="none";}
+  }
+  summary.style.display="block";foot.style.display="block";
+}
+
+window.toggleCart=function(){
+  var p=document.getElementById("pij-cpanel"),o=document.getElementById("pij-cart-overlay");
+  if(p.classList.contains("on")){p.classList.remove("on");o.classList.remove("on");document.body.style.overflow="";}
+  else{renderPanel();p.classList.add("on");o.classList.add("on");document.body.style.overflow="hidden";}
+};
+window.closePanel=function(){
+  document.getElementById("pij-cpanel").classList.remove("on");
+  document.getElementById("pij-cart-overlay").classList.remove("on");
+  document.body.style.overflow="";
+};
+
+/* ── CHECKOUT ── */
+var isContra=false;
+window.openCo=function(contra){
+  isContra=contra;closePanel();
+  document.getElementById("pij-co-title").textContent=contra?"Pago contraentrega":"Finalizar pedido";
+  document.getElementById("pij-co-sub").textContent=contra?"Completa tus datos. El pago se realiza al recibir.":"Completa tus datos para continuar.";
+  document.getElementById("pij-co-notice").style.display=contra?"block":"none";
+  var t=calcTotals();
+  var extraContra=contra?5000:0;
+  var lines=cart.map(function(c){return'<div class="pij-co-res-item">'+c.qty+"× "+c.item.name+" T"+c.size+" — "+fmt(c.item.price*c.qty)+'</div>';}).join("");
+  if(t.combos>0)lines+='<div class="pij-co-res-item" style="color:#2ECC40">🎁 Descuento combo ('+t.combos+') −'+fmt(t.comboDisc)+'</div>';
+  if(t.envio>0)lines+='<div class="pij-co-res-item">📦 Envío — '+fmt(t.envio)+'</div>';
+  else lines+='<div class="pij-co-res-item" style="color:#2ECC40">📦 Envío — Gratis</div>';
+  if(contra)lines+='<div class="pij-co-res-item" style="color:rgba(255,255,255,.5)">Recargo contraentrega +'+fmt(extraContra)+'</div>';
+  lines+='<div class="pij-co-res-total">Total: '+fmt(t.total+extraContra)+'</div>';
+  document.getElementById("pij-co-resumen").innerHTML='<div class="pij-co-res-title">Resumen del pedido</div>'+lines;
+  document.getElementById("pij-co-ov").classList.add("on");document.body.style.overflow="hidden";
+};
+window.closeCo=function(){document.getElementById("pij-co-ov").classList.remove("on");document.body.style.overflow="";};
+window.closeCoIfBg=function(e){if(e.target===document.getElementById("pij-co-ov"))closeCo();};
+
+document.getElementById("pij-co-submit").onclick=function(){
+  var nombre=document.getElementById("co-nombre").value.trim();
+  var cel=document.getElementById("co-cel").value.trim();
+  var email=document.getElementById("co-email").value.trim();
+  var dir=document.getElementById("co-dir").value.trim();
+  if(!nombre||!cel||!email||!dir){alert("Por favor completa todos los campos.");return;}
+  var t=calcTotals();var extraContra=isContra?5000:0;
+  var lines=cart.map(function(c){return c.qty+"x "+c.item.name+" T"+c.size;}).join(", ");
+  var msg=(isContra?"PEDIDO CONTRAENTREGA":"PEDIDO WOMPI")+" · Sustancia P\n"+lines+"\nSubtotal: "+fmt(t.subtotal)+(t.combos>0?"\nDescuento combo: −"+fmt(t.comboDisc):"")+"\nEnvío: "+(t.envio===0?"Gratis":fmt(t.envio))+(isContra?"\nRecargo contraentrega: +"+fmt(extraContra):"")+"\nTotal: "+fmt(t.total+extraContra)+"\nNombre: "+nombre+"\nCel: "+cel+"\nEmail: "+email+"\nDirección: "+dir;
+  if(typeof sendPrompt==="function")sendPrompt(msg);
+  closeCo();
+};
+
+/* ── WIZARD MÓVIL ── */
+var wzCombos=[];
+var wzIdCounter=0;
+
+function wizardNew(){
+  var id=++wzIdCounter;
+  wzCombos.push({id:id,top:null,topSize:'S',pants:null,pantsSize:'S'});
+  renderWizard();
+  setTimeout(function(){
+    var el=document.getElementById('wz-'+id);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },100);
+}
+
+function wizardRemove(id){
+  wzCombos=wzCombos.filter(function(c){return c.id!==id;});
+  renderWizard();
+}
+
+function wizardSetTop(id,item){
+  var c=wzCombos.find(function(c){return c.id===id;});
+  if(c){c.top=item;}renderWizard();
+}
+function wizardSetPants(id,item){
+  var c=wzCombos.find(function(c){return c.id===id;});
+  if(c){c.pants=item;}renderWizard();
+}
+function wizardSetSize(id,type,sz){
+  var c=wzCombos.find(function(c){return c.id===id;});
+  if(c){c[type+'Size']=sz;}renderWizard();
+}
+function wizardAddToCart(id){
+  var c=wzCombos.find(function(c){return c.id===id;});
+  if(!c||!c.top||!c.pants)return;
+  addToCart(c.top,c.topSize);
+  addToCart(c.pants,c.pantsSize);
+  wizardRemove(id);
+  toggleCart();
+}
+
+function renderWizard(){
+  var container=document.getElementById('wizard-combos');
+  if(!container)return;
+  container.innerHTML='';
+  wzCombos.forEach(function(wc,idx){
+    var complete=wc.top&&wc.pants;
+    var div=document.createElement('div');
+    div.className='wz-card'+(complete?' complete':'');
+    div.id='wz-'+wc.id;
+
+    // Opciones de tops
+    var topOpts=TOPS.map(function(item){
+      var sel=wc.top&&wc.top.id===item.id;
+      var svg=svgTop(item.color,item.m,40);
+      return '<div class="wz-opt'+(sel?' selected':'')+'" onclick="wizardSetTop('+wc.id+',window.TOPS.find(function(t){return t.id===\''+item.id+'\'}))">'
+        +'<div class="wz-opt-vis" style="background:'+item.bg+'">'+svg+'</div>'
+        +'<div class="wz-opt-name">'+item.name.replace('Camiseta ','')+'</div>'
+        +'</div>';
+    }).join('');
+
+    // Opciones de pantalones
+    var pantsOpts=PANTS.map(function(item){
+      var sel=wc.pants&&wc.pants.id===item.id;
+      var svg=svgPants(item.color,item.m,40);
+      return '<div class="wz-opt'+(sel?' selected':'')+'" onclick="wizardSetPants('+wc.id+',window.PANTS.find(function(p){return p.id===\''+item.id+'\'}))">'
+        +'<div class="wz-opt-vis" style="background:'+item.bg+'">'+svg+'</div>'
+        +'<div class="wz-opt-name">'+item.name.replace('Pantalón ','')+'</div>'
+        +'</div>';
+    }).join('');
+
+    // Tallas camiseta
+    var topSizes=SIZES.map(function(s){
+      return '<button class="wz-sz'+(wc.topSize===s?' on':'')+'" onclick="wizardSetSize('+wc.id+',\'top\',\''+s+'\')">'+s+'</button>';
+    }).join('');
+
+    // Tallas pantalón
+    var pantsSizes=SIZES.map(function(s){
+      return '<button class="wz-sz'+(wc.pantsSize===s?' on':'')+'" onclick="wizardSetSize('+wc.id+',\'pants\',\''+s+'\')">'+s+'</button>';
+    }).join('');
+
+    var footerInfo=complete
+      ? '<div class="wz-footer-info"><strong>$99.900</strong> · <span class="wz-envio">📦 Envío incluido</span></div>'
+      : '<div class="wz-footer-info">Elige camiseta y pantalón</div>';
+
+    div.innerHTML=''
+      +'<div class="wz-card-head">'
+        +'<div class="wz-card-num">'+(idx+1)+'</div>'
+        +'<div class="wz-card-title">Combo Guardia Nocturna</div>'
+        +(complete?'<div class="wz-card-price">$99.900</div>':'')
+        +'<button class="wz-card-del" onclick="wizardRemove('+wc.id+')">×</button>'
+      +'</div>'
+      +'<div class="wz-steps">'
+        +'<div class="wz-step">'
+          +'<div class="wz-step-label">Camiseta</div>'
+          +'<div class="wz-options">'+topOpts+'</div>'
+          +(wc.top?'<div class="wz-step-size">'+topSizes+'</div>':'')
+        +'</div>'
+        +'<div class="wz-divider"></div>'
+        +'<div class="wz-step">'
+          +'<div class="wz-step-label">Pantalón</div>'
+          +'<div class="wz-options">'+pantsOpts+'</div>'
+          +(wc.pants?'<div class="wz-step-size">'+pantsSizes+'</div>':'')
+        +'</div>'
+      +'</div>'
+      +'<div class="wz-card-footer'+(complete?' locked':'')+'">'
+        +footerInfo
+        +'<button class="wz-btn-add" '+(complete?'onclick="wizardAddToCart('+wc.id+')"':'disabled')+'>Agregar →</button>'
+      +'</div>';
+
+    container.appendChild(div);
+  });
+}
+
+function renderCatalogMobile(){
+  ['tops','pants'].forEach(function(key){
+    var items=key==='tops'?TOPS:PANTS;
+    var grid=document.getElementById('grid-'+key+'-mobile');
+    if(!grid)return;
+    grid.innerHTML='';
+    items.forEach(function(item){
+      var inCart=cart.some(function(c){return c.id===item.id;});
+      var totalQty=cart.filter(function(c){return c.id===item.id;}).reduce(function(s,c){return s+c.qty;},0);
+      var card=document.createElement('div');
+      card.className='prod-card'+(inCart?' in-cart':'');
+      var svgH=key==='tops'?svgTop(item.color,item.m,65):svgPants(item.color,item.m,65);
+      var badge='<div class="cart-qty-badge">'+totalQty+'</div>';
+      var opts=SIZES.map(function(s){return'<option>'+s+'</option>';}).join('');
+      card.innerHTML=badge
+        +'<div class="prod-vis" style="background:'+item.bg+'">'+svgH+'<div class="padd-hover">Ver detalle</div></div>'
+        +'<div class="prod-body">'
+        +'<div class="prod-name">'+item.name+'</div>'
+        +'<div class="prod-price">'+fmt(item.price)+'</div>'
+        +'<div class="prod-actions">'
+        +'<select class="size-sel" id="szm-'+item.id+'">'+opts+'</select>'
+        +'<button class="btn-add">+ Agregar</button>'
+        +'</div></div>';
+      grid.appendChild(card);
+      card.querySelector('.btn-add').onclick=function(e){
+        e.stopPropagation();
+        var sz=document.getElementById('szm-'+item.id).value;
+        addToCart(item,sz);
+        renderCatalogMobile();
+      };
+      card.querySelector('.size-sel').onclick=function(e){e.stopPropagation();};
+      card.onclick=function(){openModal(item);};
+    });
+  });
+}
+window.wizardRemove=wizardRemove;
+window.wizardSetTop=wizardSetTop;
+window.wizardSetPants=wizardSetPants;
+window.wizardSetSize=wizardSetSize;
+window.wizardAddToCart=wizardAddToCart;
+window.wizardNew=wizardNew;
+window.renderCatalogMobile=renderCatalogMobile;
+window.TOPS=TOPS;
+window.PANTS=PANTS;
+
+updateBubble();
+})();
+
+// ── Inicialización móvil — fuera del IIFE ──
+function isMobile(){ return window.innerWidth <= 640; }
+
+function initMobileView(){
+  if(!isMobile()) return;
+  var combos = document.getElementById('wizard-combos');
+  if(combos && combos.children.length === 0) window.wizardNew();
+  if(window.renderCatalogMobile) window.renderCatalogMobile();
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initMobileView);
+} else {
+  initMobileView();
+}
+
+window.addEventListener('resize', function(){
+  if(isMobile()){
+    var combos = document.getElementById('wizard-combos');
+    if(combos && combos.children.length === 0) window.wizardNew();
+    if(window.renderCatalogMobile) window.renderCatalogMobile();
+  }
+});
+</script>
