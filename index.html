@@ -38,6 +38,11 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 
 /* ══ WIZARD MÓVIL ══ */
 #wizard{padding-bottom:24px}
+#wz-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.wz-tab{background:#f4f2fa;border:2px solid #ede9ff;border-radius:14px;padding:12px 10px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:#888;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .2s;text-align:center;line-height:1.2}
+.wz-tab.active{background:#fff;border-color:#7F77DD;color:#12001f;box-shadow:0 2px 12px rgba(127,119,221,.15)}
+.wz-tab-pill{font-size:9px;font-weight:700;color:#aaa;letter-spacing:.04em}
+.wz-tab.active .wz-tab-pill{color:#7F77DD}
 #wizard-combos{display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
 .wz-card{background:#fff;border:2px solid #ede9ff;border-radius:16px;overflow:hidden;transition:border-color .2s}
 .wz-card.complete{border-color:#7F77DD}
@@ -282,6 +287,7 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 .cat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:#888;margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .cat-label::after{content:'';flex:1;height:.5px;background:#e0e0e0}
 .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px}
+#grid-tops-mobile,#grid-pants-mobile{grid-template-columns:1fr 1fr}
 .prod-card{background:#f4f2fa;border-radius:14px;overflow:hidden;border:1.5px solid transparent;transition:border-color 200ms,transform 150ms;position:relative;cursor:pointer}
 .prod-card:hover{transform:translateY(-3px)}
 .prod-card.in-cart{border-color:#7F77DD}
@@ -520,33 +526,46 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 
   <!-- ══ WIZARD MÓVIL ══ -->
   <div id="wizard" class="mobile-only">
-    <!-- Combos armados -->
-    <div id="wizard-combos"></div>
-    <!-- Botón agregar combo -->
-    <button id="wizard-add-btn" onclick="wizardNew()">
-      <span id="wizard-add-icon">＋</span>
-      <div>
-        <div id="wizard-add-title">Armar otro combo</div>
-        <div id="wizard-add-sub">Camiseta + Pantalón · $99.900 con envío</div>
-      </div>
-    </button>
 
-    <!-- Prendas individuales -->
-    <div id="wz-individual">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <div id="wz-individual-title">¿Solo una prenda?</div>
-        <span style="background:#f0eeff;color:#aaa;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:60px">Sin combo</span>
-      </div>
-      <div id="wz-individual-sub">También puedes llevar camiseta o pantalón por separado. El envío se cobra aparte ($10.000).</div>
-      <div class="wz-ind-section">
-        <div class="wz-ind-label">Camisetas — $45.000 c/u</div>
-        <div class="prod-grid" id="grid-tops-mobile"></div>
-      </div>
-      <div class="wz-ind-section">
-        <div class="wz-ind-label">Pantalones — $70.000 c/u</div>
-        <div class="prod-grid" id="grid-pants-mobile"></div>
+    <!-- Tabs selector -->
+    <div id="wz-tabs">
+      <button class="wz-tab active" id="wz-tab-combo" onclick="wzShowTab('combo')">
+        Arma tu combo
+        <span class="wz-tab-pill">$99.900 · envío incluido</span>
+      </button>
+      <button class="wz-tab" id="wz-tab-individual" onclick="wzShowTab('individual')">
+        Prenda individual
+        <span class="wz-tab-pill">desde $45.000</span>
+      </button>
+    </div>
+
+    <!-- Panel combo -->
+    <div id="wz-panel-combo">
+      <div id="wizard-combos"></div>
+      <button id="wizard-add-btn" onclick="wizardNew()">
+        <span id="wizard-add-icon">＋</span>
+        <div>
+          <div id="wizard-add-title">Armar otro combo</div>
+          <div id="wizard-add-sub">Camiseta + Pantalón · $99.900 con envío</div>
+        </div>
+      </button>
+    </div>
+
+    <!-- Panel individual -->
+    <div id="wz-panel-individual" style="display:none">
+      <div id="wz-individual">
+        <div id="wz-individual-sub">Lleva camiseta o pantalón por separado. El envío se cobra aparte ($10.000).</div>
+        <div class="wz-ind-section">
+          <div class="wz-ind-label">Camisetas — $45.000 c/u</div>
+          <div class="prod-grid" id="grid-tops-mobile"></div>
+        </div>
+        <div class="wz-ind-section">
+          <div class="wz-ind-label">Pantalones — $70.000 c/u</div>
+          <div class="prod-grid" id="grid-pants-mobile"></div>
+        </div>
       </div>
     </div>
+
   </div>
   </div>
 </div>
@@ -788,6 +807,20 @@ document.getElementById("ta-p").onclick=function(e){e.stopPropagation();navT("p"
 document.getElementById("ta-n").onclick=function(e){e.stopPropagation();navT("n");};
 document.getElementById("pa-p").onclick=function(e){e.stopPropagation();navP("p");};
 document.getElementById("pa-n").onclick=function(e){e.stopPropagation();navP("n");};
+
+window.wzShowTab=function(tab){
+  var combo=document.getElementById("wz-panel-combo");
+  var individual=document.getElementById("wz-panel-individual");
+  var tabCombo=document.getElementById("wz-tab-combo");
+  var tabInd=document.getElementById("wz-tab-individual");
+  if(tab==="combo"){
+    combo.style.display="";individual.style.display="none";
+    tabCombo.classList.add("active");tabInd.classList.remove("active");
+  } else {
+    combo.style.display="none";individual.style.display="";
+    tabInd.classList.add("active");tabCombo.classList.remove("active");
+  }
+};
 
 /* ── CATÁLOGO ── */
 function renderCatalog(){
