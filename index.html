@@ -181,9 +181,9 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 @media(max-width:640px){#combo-visual{gap:8px}.cv-svg-box{width:58px;height:58px}.cv-result-price{font-size:34px}.cv-price{font-size:12px}}
 
 /* ══ CAT INTRO ══ */
-#cat-hero{background:linear-gradient(160deg,#12001f 0%,#2d1b3d 55%,#1a2d1a 100%);position:relative;overflow:hidden}
+#cat-hero{background:#1e0a2e;position:relative;overflow:hidden}
 #cat-intro{padding:40px 20px 32px;position:relative}
-#cat-intro::before{content:'GUARDIA NOCTURNA';position:absolute;bottom:-10px;left:0;right:0;font-family:Anton,sans-serif;font-size:clamp(48px,10vw,100px);color:rgba(255,255,255,.04);letter-spacing:-.02em;text-transform:uppercase;pointer-events:none;white-space:nowrap;text-align:center}
+#cat-intro::before{display:none}
 #cat-intro-eyebrow{display:inline-flex;background:rgba(127,119,221,.2);border:1px solid rgba(127,119,221,.4);border-radius:60px;padding:4px 14px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#a89ff0;margin-bottom:12px}
 #cat-intro-title{font-family:Anton,sans-serif;font-size:clamp(26px,5vw,42px);letter-spacing:.04em;text-transform:uppercase;color:white;margin-bottom:10px;line-height:1}
 @media(max-width:640px){#cat-intro-title{font-size:28px}}
@@ -258,8 +258,8 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 #hero{background:#12001f;overflow:hidden;position:relative}
 #hero-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:clamp(80px,22vw,240px);color:white;opacity:.05;letter-spacing:-.03em;text-transform:uppercase;pointer-events:none;user-select:none;white-space:nowrap;z-index:0}
 #stage{position:relative;z-index:5;display:grid;grid-template-columns:1fr 1fr;height:300px}
-.lane{position:relative;overflow:hidden;cursor:pointer;border-top:1px solid rgba(255,255,255,.07);transition:background-color 500ms ease}
-.lane-left{border-right:1px solid rgba(255,255,255,.1)}
+.lane{position:relative;overflow:hidden;cursor:pointer;transition:background-color 500ms ease}
+.lane-left{border-right:1px solid rgba(255,255,255,.06)}
 .lane-label{position:absolute;top:12px;left:0;right:0;text-align:center;z-index:20;font-size:9px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:'Nunito',sans-serif;pointer-events:none}
 .prenda-stage{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:48px}
 .prenda-nombre{font-family:Anton,sans-serif;font-size:clamp(12px,2vw,15px);letter-spacing:.08em;text-transform:uppercase;color:white;opacity:.9;margin-top:8px;text-align:center;padding:0 6px}
