@@ -33,7 +33,6 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 @media(max-width:640px){
   .desktop-only{display:none !important}
   .mobile-only{display:block !important}
-  #cat-intro{padding:28px 20px;margin:-24px -16px 24px}
   #cat-intro-prices{display:none}
 }
 
@@ -144,7 +143,8 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 
 /* ══ CTA FINAL ══ */
 #cta-final{background:#12001f;border-top:1px solid rgba(255,255,255,.06)}
-#cta-final .sec-inner{padding:72px 24px}
+.sec-inner{padding:56px 20px}
+#cta-final .sec-inner{padding:72px 20px}
 
 /* ══ FOOTER ══ */
 #footer{background:#0a0015;padding:48px 24px 28px;border-top:1px solid rgba(255,255,255,.06)}
@@ -181,10 +181,12 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 @media(max-width:640px){#combo-visual{gap:8px}.cv-svg-box{width:58px;height:58px}.cv-result-price{font-size:34px}.cv-price{font-size:12px}}
 
 /* ══ CAT INTRO ══ */
-#cat-intro{background:linear-gradient(135deg,#12001f 0%,#2d1b3d 60%,#1a2d1a 100%);padding:40px 32px;margin:-24px -16px 32px;position:relative;overflow:hidden}
+#cat-hero{background:linear-gradient(160deg,#12001f 0%,#2d1b3d 55%,#1a2d1a 100%);position:relative;overflow:hidden}
+#cat-intro{padding:40px 20px 32px;position:relative}
 #cat-intro::before{content:'GUARDIA NOCTURNA';position:absolute;bottom:-10px;left:0;right:0;font-family:Anton,sans-serif;font-size:clamp(48px,10vw,100px);color:rgba(255,255,255,.04);letter-spacing:-.02em;text-transform:uppercase;pointer-events:none;white-space:nowrap;text-align:center}
 #cat-intro-eyebrow{display:inline-flex;background:rgba(127,119,221,.2);border:1px solid rgba(127,119,221,.4);border-radius:60px;padding:4px 14px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#a89ff0;margin-bottom:12px}
 #cat-intro-title{font-family:Anton,sans-serif;font-size:clamp(26px,5vw,42px);letter-spacing:.04em;text-transform:uppercase;color:white;margin-bottom:10px;line-height:1}
+@media(max-width:640px){#cat-intro-title{font-size:28px}}
 #cat-intro-sub{font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;max-width:480px;margin-bottom:20px}
 #cat-intro-sub strong{color:white;font-weight:800}
 #cat-intro-prices{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -198,7 +200,7 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 .cip-combo .cip-val{font-size:20px;color:white}
 .cip-envio{font-size:10px;color:#2ECC40;font-weight:700;margin-top:2px}
 @media(max-width:640px){
-  #cat-intro{padding:32px 20px;margin:-24px -16px 28px}
+  #cat-intro{padding:32px 20px 28px}
   #cat-intro-prices{flex-direction:column;align-items:stretch;gap:8px}
   .cip-plus,.cip-arrow{display:none}
   .cip-tag,.cip-combo{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
@@ -206,6 +208,7 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
   .cip-combo .cip-val{font-size:20px}
   .cip-combo{flex-direction:column;align-items:flex-start}
 }
+.cat-grid-wrap{padding-top:28px}
 
 /* ══ PROMO BANNER ══ */
 #promo-banner{background:linear-gradient(135deg,#12001f 0%,#2d1b3d 100%);border-radius:16px;padding:24px 28px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;gap:20px;border:1.5px solid rgba(127,119,221,.3);position:relative;overflow:hidden}
@@ -271,7 +274,7 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 .prenda-svg.pop{animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
 
 /* ══ CATÁLOGO ══ */
-#catalogo{background:#ffffff;padding:24px 16px 0}
+#catalogo{background:#ffffff;padding:0 16px 0}
 .cat-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
 .cat-title{font-family:Anton,sans-serif;font-size:20px;letter-spacing:.06em;text-transform:uppercase;color:#12001f}
 .combo-pill{background:rgba(46,204,64,.12);border:1px solid rgba(46,204,64,.3);color:#22A835;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
@@ -436,6 +439,42 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 <!-- ══ HERO ══ -->
 <div id="hero">
   <div id="hero-bg">PIJAMAS</div>
+</div>
+
+<!-- ══ INTRO + SELECTOR (sección oscura independiente) ══ -->
+<div id="cat-hero">
+  <div id="cat-intro">
+    <div id="cat-intro-eyebrow">· Colección Guardia Nocturna ·</div>
+    <div id="cat-intro-title">Arma tu Guardia Nocturna</div>
+    <div id="cat-intro-sub">Combina cualquier camiseta con cualquier pantalón. El combo sale <strong>$99.900 con envío incluido</strong> a toda Colombia.</div>
+    <div id="cat-intro-prices">
+      <div id="combo-visual">
+        <div class="cv-prenda">
+          <div class="cv-svg-box" style="background:#2d1b3d">
+            <svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg" style="height:54px;width:auto;filter:drop-shadow(0 6px 16px rgba(0,0,0,.5))"><path d="M30 10 L10 30 L25 35 L22 100 L98 100 L95 35 L110 30 L90 10 Q75 18 60 18 Q45 18 30 10Z" fill="#3d2550" stroke="rgba(255,255,255,.4)" stroke-width="2.5" stroke-linejoin="round"/><ellipse cx="60" cy="58" rx="14" ry="10" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/></svg>
+          </div>
+          <div class="cv-price">$45.000</div>
+          <div class="cv-label">Camiseta</div>
+        </div>
+        <div class="cv-sep">+</div>
+        <div class="cv-prenda">
+          <div class="cv-svg-box" style="background:#1a1a2e">
+            <svg viewBox="0 0 110 130" xmlns="http://www.w3.org/2000/svg" style="height:54px;width:auto;filter:drop-shadow(0 6px 16px rgba(0,0,0,.5))"><rect x="10" y="8" width="90" height="22" rx="4" fill="#252545" stroke="rgba(255,255,255,.4)" stroke-width="2"/><path d="M10 28 L10 75 Q10 105 35 118 L55 118 L55 65 L55 118 L75 118 Q100 105 100 75 L100 28Z" fill="#252545" stroke="rgba(255,255,255,.4)" stroke-width="2.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="cv-price">$70.000</div>
+          <div class="cv-label">Pantalón</div>
+        </div>
+        <div class="cv-arrow">→</div>
+        <div class="cv-result">
+          <div class="cv-result-sub">Combo</div>
+          <div class="cv-result-price">$<span id="price-counter-num">125.000</span></div>
+          <div class="cv-result-envio" id="price-counter-save">📦 envío incluido</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SELECTOR DE ROPA ══ -->
   <div id="stage">
     <div class="lane lane-left" id="lane-top">
       <div class="lane-label">CAMISETAS</div>
@@ -468,37 +507,7 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 
 <!-- ══ CATÁLOGO ══ -->
 <div id="catalogo">
-  <div id="cat-intro">
-    <div id="cat-intro-eyebrow">· Colección Guardia Nocturna ·</div>
-    <div id="cat-intro-title">Arma tu Guardia Nocturna</div>
-    <div id="cat-intro-sub">Combina cualquier camiseta con cualquier pantalón. El combo sale <strong>$99.900 con envío incluido</strong> a toda Colombia.</div>
-    <div id="cat-intro-prices">
-      <div id="combo-visual">
-        <div class="cv-prenda">
-          <div class="cv-svg-box" style="background:#2d1b3d">
-            <svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg" style="height:54px;width:auto;filter:drop-shadow(0 6px 16px rgba(0,0,0,.5))"><path d="M30 10 L10 30 L25 35 L22 100 L98 100 L95 35 L110 30 L90 10 Q75 18 60 18 Q45 18 30 10Z" fill="#3d2550" stroke="rgba(255,255,255,.4)" stroke-width="2.5" stroke-linejoin="round"/><ellipse cx="60" cy="58" rx="14" ry="10" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/></svg>
-          </div>
-          <div class="cv-price">$45.000</div>
-          <div class="cv-label">Camiseta</div>
-        </div>
-        <div class="cv-sep">+</div>
-        <div class="cv-prenda">
-          <div class="cv-svg-box" style="background:#1a1a2e">
-            <svg viewBox="0 0 110 130" xmlns="http://www.w3.org/2000/svg" style="height:54px;width:auto;filter:drop-shadow(0 6px 16px rgba(0,0,0,.5))"><rect x="10" y="8" width="90" height="22" rx="4" fill="#252545" stroke="rgba(255,255,255,.4)" stroke-width="2"/><path d="M10 28 L10 75 Q10 105 35 118 L55 118 L55 65 L55 118 L75 118 Q100 105 100 75 L100 28Z" fill="#252545" stroke="rgba(255,255,255,.4)" stroke-width="2.5" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="cv-price">$70.000</div>
-          <div class="cv-label">Pantalón</div>
-        </div>
-        <div class="cv-arrow">→</div>
-        <div class="cv-result">
-          <div class="cv-result-sub">Combo</div>
-          <div class="cv-result-price">$<span id="price-counter-num">125.000</span></div>
-          <div class="cv-result-envio" id="price-counter-save">📦 envío incluido</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <div class="cat-grid-wrap">
   <div class="cat-section desktop-only">
     <div class="cat-label">Camisetas — $45.000 c/u</div>
     <div class="prod-grid" id="grid-tops"></div>
@@ -535,6 +544,7 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
         <div class="prod-grid" id="grid-pants-mobile"></div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 
@@ -1396,6 +1406,7 @@ updateBubble();
   }
 })();
 </script>
+<script>
 (function(){
   var el=document.getElementById('price-counter-num');
   var wrap=el?el.parentElement:null;
