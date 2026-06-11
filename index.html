@@ -70,9 +70,9 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 .wz-btn-add:hover{background:#534AB7}
 .wz-btn-add:disabled{background:#ddd;color:#aaa;cursor:not-allowed}
 
-#wz-individual{margin-top:28px;padding-top:24px;border-top:1px solid #f0eeff}
-#wz-individual-title{font-family:Anton,sans-serif;font-size:16px;letter-spacing:.05em;text-transform:uppercase;color:#12001f;margin-bottom:6px}
-#wz-individual-sub{font-size:12px;color:#888;line-height:1.5;margin-bottom:20px}
+#wz-individual{margin-top:28px;padding:20px;background:#f8f7ff;border-radius:16px;border:1.5px dashed #ddd8f5}
+#wz-individual-title{font-family:Anton,sans-serif;font-size:14px;letter-spacing:.05em;text-transform:uppercase;color:#888;margin-bottom:4px}
+#wz-individual-sub{font-size:11px;color:#aaa;line-height:1.5;margin-bottom:16px}
 .wz-ind-section{margin-bottom:24px}
 .wz-ind-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:#888;margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .wz-ind-label::after{content:'';flex:1;height:.5px;background:#e0e0e0}
@@ -533,7 +533,10 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 
     <!-- Prendas individuales -->
     <div id="wz-individual">
-      <div id="wz-individual-title">¿Solo una prenda?</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <div id="wz-individual-title">¿Solo una prenda?</div>
+        <span style="background:#f0eeff;color:#aaa;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:60px">Sin combo</span>
+      </div>
       <div id="wz-individual-sub">También puedes llevar camiseta o pantalón por separado. El envío se cobra aparte ($10.000).</div>
       <div class="wz-ind-section">
         <div class="wz-ind-label">Camisetas — $45.000 c/u</div>
