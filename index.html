@@ -983,11 +983,10 @@ function initMobileView(){
   if(window.renderCatalogMobile) window.renderCatalogMobile();
 }
 
-if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', initMobileView);
-} else {
-  initMobileView();
-}
+// Triple seguro: DOMContentLoaded + load + setTimeout
+document.addEventListener('DOMContentLoaded', initMobileView);
+window.addEventListener('load', initMobileView);
+setTimeout(initMobileView, 100);
 
 window.addEventListener('resize', function(){
   if(isMobile()){
