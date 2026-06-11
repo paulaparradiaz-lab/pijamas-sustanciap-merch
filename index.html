@@ -84,6 +84,83 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 #wizard-add-title{font-size:14px;font-weight:800;color:#12001f;text-align:left}
 #wizard-add-sub{font-size:11px;color:#888;text-align:left;margin-top:2px}
 
+/* ══ PROCESO ANIMADO ══ */
+#proceso{background:#ffffff}
+.proceso-steps-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.proceso-line{position:absolute;top:28px;left:calc(10% + 14px);right:calc(10% + 14px);height:2px;background:linear-gradient(to right,#7F77DD 0%,#a89ff0 50%,#2ECC40 100%);opacity:.2;z-index:0;pointer-events:none}
+.ps-item{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 12px;position:relative;z-index:1;opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.ps-item.visible{opacity:1;transform:translateY(0)}
+.ps-dot-wrap{margin-bottom:16px}
+.ps-dot{width:56px;height:56px;border-radius:50%;background:#fff;border:2px solid #ede9ff;display:flex;align-items:center;justify-content:center;font-size:22px;transition:all .3s;box-shadow:0 4px 16px rgba(127,119,221,.12);position:relative}
+.ps-dot .ps-num{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#7F77DD;color:white;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif}
+.ps-item:hover .ps-dot{transform:translateY(-6px);box-shadow:0 8px 24px rgba(127,119,221,.25);border-color:#7F77DD}
+.ps-title{font-size:13px;font-weight:800;color:#12001f;margin-bottom:6px;font-family:'Nunito',sans-serif}
+.ps-desc{font-size:11px;color:#888;line-height:1.55;font-family:'Nunito',sans-serif}
+@media(max-width:640px){.proceso-steps-wrap{grid-template-columns:1fr;gap:20px}.proceso-line{display:none}.ps-item{flex-direction:row;text-align:left;align-items:flex-start;gap:12px}.ps-dot{width:44px;height:44px;font-size:18px;flex-shrink:0}}
+
+/* ══ TESTIMONIOS DESLIZANTES ══ */
+#testimonios{background:#f8f7ff;padding:72px 24px;overflow:hidden}
+.testi-inner{max-width:1100px;margin:0 auto}
+.testi-header{text-align:center;margin-bottom:48px}
+.testi-header h2{font-family:'Nunito',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:900;color:#12001f;margin-top:8px;letter-spacing:-.3px}
+.testi-header p{font-size:14px;color:#888;margin-top:8px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.6}
+.testi-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;height:520px;position:relative;overflow:hidden;mask-image:linear-gradient(to bottom,transparent 0%,black 10%,black 90%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 10%,black 90%,transparent 100%)}
+.testi-col{display:flex;flex-direction:column;gap:12px;will-change:transform}
+.testi-col-1{animation:scrollUp 20s linear infinite}
+.testi-col-2{animation:scrollUp 28s linear infinite}
+.testi-col-3{animation:scrollUp 16s linear infinite}
+@keyframes scrollUp{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+.tcard{background:white;border:1.5px solid #ede9ff;border-radius:14px;padding:20px;flex-shrink:0;border-top:3px solid #7F77DD}
+.tcard.accent-lila{border-top-color:#7F77DD}
+.tcard.accent-green{border-top-color:#2ECC40}
+.tcard.accent-dark{border-top-color:#12001f}
+.tcard-stars{font-size:12px;color:#7F77DD;letter-spacing:2px;margin-bottom:10px}
+.tcard-quote{font-size:12px;line-height:1.65;color:#444;margin-bottom:14px}
+.tcard-quote::before{content:'"';font-size:18px;color:#7F77DD;font-weight:800;line-height:0;vertical-align:-4px;margin-right:1px}
+.tcard-quote::after{content:'"';font-size:18px;color:#7F77DD;font-weight:800;line-height:0;vertical-align:-4px;margin-left:1px}
+.tcard-author{display:flex;align-items:center;gap:9px}
+.tcard-avatar{width:32px;height:32px;border-radius:50%;background:#f0eeff;color:#7F77DD;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;flex-shrink:0}
+.tcard-author-name{font-size:12px;font-weight:700;color:#12001f;font-family:'Nunito',sans-serif}
+.tcard-author-role{font-size:10px;color:#888;font-family:'Nunito',sans-serif}
+.testi-trust-bar{display:flex;justify-content:center;align-items:center;gap:28px;flex-wrap:wrap;padding-top:32px;margin-top:4px;border-top:0.5px solid #ede9ff}
+.tt-item{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:#888}
+.tt-dot{width:6px;height:6px;border-radius:50%;background:#7F77DD;flex-shrink:0}
+@media(max-width:640px){.testi-columns{grid-template-columns:1fr;height:380px}.testi-col-2,.testi-col-3{display:none}}
+
+/* ══ COBERTURA + MAPA ══ */
+#cobertura{background:#12001f;padding:0}
+.cob-inner{max-width:960px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.cob-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.cob-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px}
+.cob-val{font-family:Anton,sans-serif;font-size:24px;color:white;letter-spacing:.02em;margin-bottom:2px}
+.cob-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);font-family:'Nunito',sans-serif}
+.cob-map-wrap{position:relative}
+#cob-tt{position:absolute;background:rgba(127,119,221,.9);color:white;font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap;z-index:10;font-family:'Nunito',sans-serif}
+.cob-ticker{display:flex;align-items:center;gap:8px;margin-top:12px}
+.cob-ticker-dot{width:6px;height:6px;border-radius:50%;background:#7F77DD;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+#cob-ticker-text{font-size:11px;color:rgba(255,255,255,.4);font-family:'Nunito',sans-serif;transition:opacity .3s}
+@media(max-width:640px){.cob-inner{grid-template-columns:1fr;padding:40px 20px;gap:28px}}
+
+/* ══ CTA FINAL ══ */
+#cta-final{background:#12001f;border-top:1px solid rgba(255,255,255,.06)}
+#cta-final .sec-inner{padding:72px 24px}
+
+/* ══ FOOTER ══ */
+#footer{background:#0a0015;padding:48px 24px 28px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-top{max-width:900px;margin:0 auto;display:flex;justify-content:space-between;gap:40px;margin-bottom:36px}
+.footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.footer-logo-mark{width:28px;height:28px;background:#7F77DD;border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:12px;color:white}
+.footer-brand-name{font-family:Anton,sans-serif;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:white}
+.footer-tag{font-size:12px;color:rgba(255,255,255,.35);max-width:220px;line-height:1.6;margin-top:4px;font-family:'Nunito',sans-serif}
+.footer-cols{display:flex;gap:40px}
+.footer-col h4{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:12px;font-family:'Nunito',sans-serif}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col a{font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;transition:color .15s;font-family:'Nunito',sans-serif}
+.footer-col a:hover{color:white}
+.footer-bottom{max-width:900px;margin:0 auto;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.04em;font-family:'Nunito',sans-serif}
+@media(max-width:640px){.footer-top{flex-direction:column;gap:24px}.footer-cols{flex-wrap:wrap;gap:24px}.footer-bottom{flex-direction:column;gap:4px;text-align:center}}
+
 /* ══ COMBO VISUAL ══ */
 #combo-visual{display:flex;align-items:center;gap:12px;width:100%}
 .cv-prenda{display:flex;flex-direction:column;align-items:center;gap:7px;flex:1;animation:cvIn .5s ease both}
@@ -460,6 +537,100 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
     </div>
   </div>
 </div>
+
+<!-- ══ PROCESO DE COMPRA ══ -->
+<section id="proceso">
+  <div class="sec-inner">
+    <div style="text-align:center;margin-bottom:52px">
+      <div class="sec-eyebrow" style="margin:0 auto 12px">· Cómo comprar ·</div>
+      <h2 class="sec-title" style="text-align:center">De tu elección a tu puerta</h2>
+      <p class="sec-sub" style="text-align:center;margin:0 auto">Simple, rápido y con seguimiento en cada paso.</p>
+    </div>
+    <div class="proceso-steps-wrap">
+      <div class="proceso-line"></div>
+      <div class="ps-item reveal-ps" data-idx="0"><div class="ps-dot-wrap"><div class="ps-dot">🛍️<span class="ps-num">1</span></div></div><div class="ps-title">Elige tu pijama</div><div class="ps-desc">3 diseños en tallas XS–XXL. Combina camiseta y pantalón libremente.</div></div>
+      <div class="ps-item reveal-ps" data-idx="1"><div class="ps-dot-wrap"><div class="ps-dot">💳<span class="ps-num">2</span></div></div><div class="ps-title">Pago seguro</div><div class="ps-desc">Wompi, Nequi, PSE o contraentrega. Tú eliges cómo pagar.</div></div>
+      <div class="ps-item reveal-ps" data-idx="2"><div class="ps-dot-wrap"><div class="ps-dot">✅<span class="ps-num">3</span></div></div><div class="ps-title">Confirmación</div><div class="ps-desc">Te avisamos por WhatsApp en minutos con los detalles de tu pedido.</div></div>
+      <div class="ps-item reveal-ps" data-idx="3"><div class="ps-dot-wrap"><div class="ps-dot">📦<span class="ps-num">4</span></div></div><div class="ps-title">Empacado con cuidado</div><div class="ps-desc">Empaque especial para que llegue en perfecto estado.</div></div>
+      <div class="ps-item reveal-ps" data-idx="4"><div class="ps-dot-wrap"><div class="ps-dot">🏠<span class="ps-num">5</span></div></div><div class="ps-title">Llega a tu puerta</div><div class="ps-desc">Despachamos en 1 día hábil. Llega en 2–3 días a toda Colombia.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIOS ══ -->
+<section id="testimonios">
+  <div class="testi-inner">
+    <div class="testi-header">
+      <div class="sec-eyebrow" style="margin:0 auto 12px">· Reseñas verificadas ·</div>
+      <h2>Lo que dicen nuestros clientes</h2>
+      <p>Profesionales de la salud que ya visten Guardia Nocturna.</p>
+    </div>
+    <div class="testi-columns">
+      <div class="testi-col testi-col-1" id="tcol1"></div>
+      <div class="testi-col testi-col-2" id="tcol2"></div>
+      <div class="testi-col testi-col-3" id="tcol3"></div>
+    </div>
+    <div class="testi-trust-bar">
+      <div class="tt-item"><span class="tt-dot"></span>+100 pedidos completados</div>
+      <div class="tt-item"><span class="tt-dot"></span>Calificación promedio 4.7 / 5</div>
+      <div class="tt-item"><span class="tt-dot"></span>Envíos a todo Colombia</div>
+      <div class="tt-item"><span class="tt-dot"></span>100% recomendarían a un amigo</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COBERTURA ══ -->
+<section id="cobertura">
+  <div class="cob-inner">
+    <div class="cob-left">
+      <div class="sec-eyebrow" style="margin-bottom:12px">· Cobertura nacional ·</div>
+      <h2 class="sec-title" style="color:white">Llegamos a cada<br>rincón de <span style="color:#7F77DD">Colombia</span></h2>
+      <p class="sec-sub" style="color:rgba(255,255,255,.55)">Despacho en 1 día hábil desde Barranquilla. Entrega en 2–3 días a ciudades principales. Contraentrega disponible.</p>
+      <div class="cob-stats">
+        <div class="cob-stat"><div class="cob-val">+100</div><div class="cob-lbl">Pedidos enviados</div></div>
+        <div class="cob-stat"><div class="cob-val" style="color:#7F77DD">1 día</div><div class="cob-lbl">Despacho</div></div>
+        <div class="cob-stat"><div class="cob-val">2–3 días</div><div class="cob-lbl">Entrega estimada</div></div>
+        <div class="cob-stat"><div class="cob-val">4.7★</div><div class="cob-lbl">Calificación</div></div>
+      </div>
+    </div>
+    <div class="cob-right">
+      <div class="cob-map-wrap">
+        <div id="cob-tt"><b id="cob-tt-c"></b><span id="cob-tt-o"></span></div>
+        <svg id="cob-svg" style="width:100%;display:block;"></svg>
+        <div class="cob-ticker"><div class="cob-ticker-dot"></div><span id="cob-ticker-text">Cargando…</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA FINAL ══ -->
+<section id="cta-final">
+  <div class="sec-inner" style="text-align:center">
+    <div class="sec-eyebrow" style="margin:0 auto 16px">· Guardia Nocturna ·</div>
+    <h2 class="sec-title" style="color:white;text-align:center">¿Listo para vestir<br>tu vocación?</h2>
+    <p class="sec-sub" style="color:rgba(255,255,255,.55);max-width:480px;margin:0 auto 28px;text-align:center">Pijamas exclusivas para profesionales de la salud. Combo desde $99.900 con envío incluido.</p>
+    <button onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})" style="background:#7F77DD;color:white;border:none;border-radius:60px;padding:16px 36px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .18s">Ver colección →</button>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer id="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo"><div class="footer-logo-mark">SP</div><span class="footer-brand-name">Pijamas Sustancia P</span></div>
+      <div class="footer-tag">Pijamas para profesionales de la salud. Colección Guardia Nocturna. Hecho con amor en Barranquilla, Colombia.</div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col"><h4>Tienda</h4><ul><li><a href="#catalogo">Camisetas</a></li><li><a href="#catalogo">Pantalones</a></li><li><a href="#catalogo">Combos</a></li></ul></div>
+      <div class="footer-col"><h4>Ayuda</h4><ul><li><a href="#proceso">Cómo comprar</a></li><li><a href="#cobertura">Envíos</a></li><li><a href="https://wa.me/573004067138" target="_blank">Contacto</a></li></ul></div>
+      <div class="footer-col"><h4>También</h4><ul><li><a href="https://sustanciap.com" target="_blank">Órganos de Peluche →</a></li><li><a href="https://sustanciap.com" target="_blank">Sustancia P</a></li></ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Sustancia P S.A.S. · Barranquilla, Colombia</span>
+    <span>Todos los derechos reservados</span>
+  </div>
+</footer>
 
 <!-- ══ MODAL PRODUCTO ══ -->
 <div class="pij-overlay" id="pij-ov" onclick="closeMIfBg(event)">
@@ -1024,6 +1195,207 @@ updateBubble();
 })();
 
 // ── Contador animado del precio ──
+(function(){
+  var el=document.getElementById('price-counter-num');
+  var wrap=el?el.parentElement:null;
+  var save=document.getElementById('price-counter-save');
+  if(!el)return;
+  var started=false;
+  var FROM=125000,TO=99900,DURATION=1600;
+  function easeOut(t){return 1-Math.pow(1-t,3);}
+  function runCounter(){
+    if(started)return;started=true;var start=null;
+    function step(ts){
+      if(!start)start=ts;
+      var progress=Math.min((ts-start)/DURATION,1);
+      var eased=easeOut(progress);
+      var val=Math.round(FROM+(TO-FROM)*eased);
+      el.textContent=val.toLocaleString('es-CO');
+      if(progress<1){requestAnimationFrame(step);}
+      else{el.textContent='99.900';if(wrap)wrap.classList.add('done');if(save)save.classList.add('show');}
+    }
+    requestAnimationFrame(step);
+  }
+  var obs=new IntersectionObserver(function(entries){if(entries[0].isIntersecting)runCounter();},{threshold:0.4});
+  var target=document.getElementById('cat-intro-prices');
+  if(target)obs.observe(target);
+})();
+
+// ── Proceso: reveal escalonado al hacer scroll ──
+(function(){
+  var steps = document.querySelectorAll('.reveal-ps');
+  if(!steps.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var el = entry.target;
+        var idx = parseInt(el.getAttribute('data-idx')) || 0;
+        setTimeout(function(){ el.classList.add('visible'); }, idx * 120);
+        obs.unobserve(el);
+      }
+    });
+  }, {threshold: 0.15});
+  steps.forEach(function(s){ obs.observe(s); });
+})();
+
+// ── Testimonios deslizantes ──
+(function(){
+  var TESTIMONIOS = [
+    {col:1,accent:'accent-lila',av:'MC',stars:'★★★★★',text:'La tela es increíblemente suave y el diseño del pantalón con los órganos es perfecto. Mis colegas me preguntaron dónde lo conseguí.',name:'María C.',role:'Médica internista · Bogotá'},
+    {col:2,accent:'accent-green',av:'JR',stars:'★★★★★',text:'Pedí el combo y llegó en 2 días. El empaque es muy cuidado y la camiseta con el corazón anatómico es mi favorita para los turnos nocturnos.',name:'Juan R.',role:'Residente de cirugía · Medellín'},
+    {col:3,accent:'accent-dark',av:'AP',stars:'★★★★★',text:'Compré para toda la guardia nocturna del servicio. El precio del combo es imbatible y la calidad es mucho mejor de lo que esperaba.',name:'Andrea P.',role:'Enfermera jefe · Cali'},
+    {col:1,accent:'accent-green',av:'DM',stars:'★★★★★',text:'El pantalón con los diseños anatómicos es una conversación garantizada en cada turno. Ya pedí el segundo combo.',name:'Diego M.',role:'Médico urgencias · Barranquilla'},
+    {col:2,accent:'accent-dark',av:'SV',stars:'★★★★★',text:'Llegó rapidísimo y la calidad superó mis expectativas. Los detalles de los diseños son increíbles.',name:'Sara V.',role:'Estudiante medicina · Bucaramanga'},
+    {col:3,accent:'accent-lila',av:'CR',stars:'★★★★★',text:'Me lo regaló mi esposo y fue el mejor regalo que he recibido en años. La camiseta con el corazón anatómico es preciosa.',name:'Camila R.',role:'Cardióloga · Bogotá'},
+    {col:1,accent:'accent-dark',av:'LP',stars:'★★★★★',text:'Excelente calidad y muy cómodo. El envío fue rapidísimo, llegó antes de lo esperado.',name:'Luis P.',role:'Interno de medicina · Manizales'},
+    {col:2,accent:'accent-lila',av:'VG',stars:'★★★★★',text:'Increíble producto. El diseño es único y la tela es súper suave. Ya lo recomendé a todos mis compañeros de residencia.',name:'Valentina G.',role:'Residente neurología · Cali'},
+    {col:3,accent:'accent-green',av:'AM',stars:'★★★★★',text:'El combo vale cada peso. Dos prendas de calidad con envío incluido a ese precio es una ganga para cualquier médico.',name:'Andrés M.',role:'Médico general · Pereira'},
+  ];
+
+  function mkCard(t){
+    return '<div class="tcard '+t.accent+'">'
+      +'<div class="tcard-stars">'+t.stars+'</div>'
+      +'<div class="tcard-quote">'+t.text+'</div>'
+      +'<div class="tcard-author"><div class="tcard-avatar">'+t.av+'</div>'
+      +'<div><div class="tcard-author-name">'+t.name+'</div>'
+      +'<div class="tcard-author-role">'+t.role+'</div></div></div></div>';
+  }
+
+  [1,2,3].forEach(function(n){
+    var col = document.getElementById('tcol'+n);
+    if(!col) return;
+    var items = TESTIMONIOS.filter(function(t){ return t.col === n; });
+    col.innerHTML = [...items, ...items].map(mkCard).join('');
+  });
+})();
+
+// ── Mapa de cobertura D3 ──
+(function(){
+  var RAW = [
+    {city:'Bogotá',lat:4.711,lng:-74.072,orders:100},
+    {city:'Medellín',lat:6.2518,lng:-75.5636,orders:48},
+    {city:'Cali',lat:3.4516,lng:-76.5319,orders:35},
+    {city:'Barranquilla',lat:10.9685,lng:-74.7813,orders:30},
+    {city:'Bucaramanga',lat:7.1193,lng:-73.1227,orders:22},
+    {city:'Cartagena',lat:10.391,lng:-75.4794,orders:18},
+    {city:'Santa Marta',lat:11.2408,lng:-74.199,orders:14},
+    {city:'Pereira',lat:4.8133,lng:-75.6961,orders:12},
+    {city:'Manizales',lat:5.0703,lng:-75.5138,orders:10},
+    {city:'Cúcuta',lat:7.8939,lng:-72.5078,orders:9},
+    {city:'Villavicencio',lat:4.142,lng:-73.626,orders:8},
+    {city:'Pasto',lat:1.2136,lng:-77.2811,orders:7},
+  ];
+
+  var tt = document.getElementById('cob-tt');
+  var ttC = document.getElementById('cob-tt-c');
+  var ttO = document.getElementById('cob-tt-o');
+  var tickerEl = document.getElementById('cob-ticker-text');
+  if(!document.getElementById('cob-svg')) return;
+
+  var maxO = Math.max.apply(null, RAW.map(function(d){ return d.orders; }));
+  function rScale(o){ return 3 + 14*(Math.sqrt(o)/Math.sqrt(maxO)); }
+  function fillCol(o){ return o>=80?'rgba(46,204,64,0.15)':o>=30?'rgba(127,119,221,0.2)':'rgba(255,255,255,0.1)'; }
+  function strokeCol(o){ return o>=80?'#2ECC40':o>=30?'#7F77DD':'rgba(255,255,255,0.4)'; }
+
+  var W=300, H=380;
+
+  if(typeof d3 === 'undefined'){
+    // Cargar D3 dinámicamente
+    var s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js';
+    s.onload = function(){
+      var s2 = document.createElement('script');
+      s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js';
+      s2.onload = function(){ drawMap(); };
+      document.head.appendChild(s2);
+    };
+    document.head.appendChild(s);
+  } else {
+    drawMap();
+  }
+
+  function drawMap(){
+    d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(function(world){
+      var countries = topojson.feature(world, world.objects.countries);
+      var colombia = countries.features.find(function(f){ return +f.id === 170; });
+      if(!colombia) return;
+
+      var svg = d3.select('#cob-svg').attr('viewBox','0 0 '+W+' '+H).attr('width','100%');
+      svg.append('rect').attr('width',W).attr('height',H).attr('fill','rgba(0,0,0,0)');
+
+      var proj = d3.geoMercator().fitSize([W,H], colombia);
+      var path = d3.geoPath(proj);
+
+      svg.append('path').datum(colombia)
+        .attr('d',path)
+        .attr('fill','rgba(255,255,255,0.06)')
+        .attr('stroke','rgba(255,255,255,0.15)')
+        .attr('stroke-width',0.8);
+
+      var defs = svg.append('defs');
+      var filter = defs.append('filter').attr('id','glow-pij').attr('x','-50%').attr('y','-50%').attr('width','200%').attr('height','200%');
+      filter.append('feGaussianBlur').attr('stdDeviation','2.5').attr('result','blur');
+      var merge = filter.append('feMerge');
+      merge.append('feMergeNode').attr('in','blur');
+      merge.append('feMergeNode').attr('in','SourceGraphic');
+
+      var sorted = RAW.slice().sort(function(a,b){ return a.orders-b.orders; });
+
+      svg.selectAll('circle.pulse')
+        .data(sorted.filter(function(d){ return d.orders>=20; })).join('circle').attr('class','pulse')
+        .attr('cx',function(d){ return proj([d.lng,d.lat])[0]; })
+        .attr('cy',function(d){ return proj([d.lng,d.lat])[1]; })
+        .attr('r',function(d){ return rScale(d.orders)+4; })
+        .attr('fill','none')
+        .attr('stroke',function(d){ return strokeCol(d.orders); })
+        .attr('stroke-width',0.8).attr('opacity',0.25);
+
+      svg.selectAll('circle.city')
+        .data(sorted).join('circle').attr('class','city')
+        .attr('cx',function(d){ return proj([d.lng,d.lat])[0]; })
+        .attr('cy',function(d){ return proj([d.lng,d.lat])[1]; })
+        .attr('r',function(d){ return rScale(d.orders); })
+        .attr('fill',function(d){ return fillCol(d.orders); })
+        .attr('stroke',function(d){ return strokeCol(d.orders); })
+        .attr('stroke-width',1.2)
+        .attr('filter','url(#glow-pij)')
+        .style('cursor','pointer')
+        .on('mouseover',function(event,d){
+          if(ttC) ttC.textContent=d.city;
+          if(ttO) ttO.textContent=' · '+d.orders+' pedidos';
+          if(tt){ tt.style.opacity='1'; tt.style.left=(event.offsetX+8)+'px'; tt.style.top=(event.offsetY-24)+'px'; }
+        })
+        .on('mouseout',function(){ if(tt) tt.style.opacity='0'; });
+
+      svg.selectAll('text.city-label')
+        .data(sorted.filter(function(d){ return d.orders>=20; })).join('text').attr('class','city-label')
+        .attr('x',function(d){ return proj([d.lng,d.lat])[0]+rScale(d.orders)+3; })
+        .attr('y',function(d){ return proj([d.lng,d.lat])[1]+4; })
+        .attr('fill','rgba(255,255,255,0.55)')
+        .attr('font-size','7px')
+        .attr('font-family','Nunito,sans-serif')
+        .attr('font-weight','700')
+        .attr('letter-spacing','0.04em')
+        .text(function(d){ return d.city.toUpperCase(); });
+
+      var byOrders = RAW.slice().sort(function(a,b){ return b.orders-a.orders; });
+      var ti = 0;
+      if(tickerEl) tickerEl.textContent = byOrders[0].city+' · '+byOrders[0].orders+' pedidos';
+      setInterval(function(){
+        ti = (ti+1) % byOrders.length;
+        if(tickerEl){
+          tickerEl.style.opacity='0';
+          setTimeout(function(){
+            tickerEl.textContent = byOrders[ti].city+' · '+byOrders[ti].orders+' pedidos';
+            tickerEl.style.opacity='1';
+          }, 300);
+        }
+      }, 2000);
+
+    }).catch(function(){});
+  }
+})();
+</script>
 (function(){
   var el=document.getElementById('price-counter-num');
   var wrap=el?el.parentElement:null;
