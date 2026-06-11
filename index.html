@@ -521,14 +521,14 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
   </div>
   <div class="pij-cp-summary" id="pij-cp-summary" style="display:none">
     <div class="pij-sum-row"><span>Subtotal</span><span class="pij-sum-val" id="pij-sum-sub">$0</span></div>
-    <div class="pij-sum-row combo" id="pij-sum-combo-row" style="display:none"><span>🎁 Combo Pijama Completa · envío incluido</span><span class="pij-sum-val" id="pij-sum-combo">−$0</span></div>
-    <div class="pij-sum-row"><span>Envío</span><span class="pij-sum-val" id="pij-sum-envio-val" style="color:#2ECC40">Gratis 🎉</span></div>
+    <div class="pij-sum-row combo" id="pij-sum-combo-row" style="display:none"><span>Combo Pijama Completa · envío incluido</span><span class="pij-sum-val" id="pij-sum-combo">−$0</span></div>
+    <div class="pij-sum-row" id="pij-sum-envio-row"><span>Envío</span><span class="pij-sum-val" id="pij-sum-envio-val" style="color:#2ECC40">Gratis 🎉</span></div>
     <div class="pij-sum-row total"><span>Total</span><span class="pij-sum-val" id="pij-sum-total">$0</span></div>
   </div>
   <div class="pij-cp-foot" id="pij-cp-foot" style="display:none">
     <div class="combo-nota" id="pij-combo-nota" style="display:none"></div>
     <button class="pij-cp-pay" onclick="openCo(false)">⚡ Pagar con Wompi</button>
-    <button class="pij-cp-contra" onclick="openCo(true)">📦 Pagar contraentrega <span style="font-size:10px;opacity:.6">(+$5.000)</span></button>
+    <button class="pij-cp-contra" onclick="openCo(true)">Pagar contraentrega <span style="font-size:10px;opacity:.6">(+$5.000)</span></button>
     <div class="pij-secure">🔒 Pago seguro · SSL · Wompi · Nequi · PSE</div>
   </div>
 </div>
@@ -676,7 +676,6 @@ window.addFromModal=function(){
   if(!mItem)return;
   for(var i=0;i<mQty;i++)addToCart(mItem,mSize);
   closeM();
-  setTimeout(function(){toggleCart();},120);
 };
 window.buyNow=function(){
   if(!mItem)return;
@@ -706,32 +705,37 @@ function calcTotals(){
   var pants=cart.filter(function(c){return c.item.type==="pants";}).reduce(function(s,c){return s+c.qty;},0);
   var combos=Math.min(tops,pants);
 
-  // Prendas que NO forman combo
   var extraTops=tops-combos;
   var extraPants=pants-combos;
 
-  // Subtotal sin descuentos
-  var subtotal=cart.reduce(function(s,c){return s+c.item.price*c.qty;},0);
+  // Subtotal prendas sin descuento
+  var subtotalPrendas=cart.reduce(function(s,c){return s+c.item.price*c.qty;},0);
 
-  // Precio normal de las prendas que SÍ forman combo
-  var normalComboPrice=combos*(45000+70000); // $115.000 por combo
-  var discountedComboPrice=combos*99900;      // $99.900 por combo
-  var comboDisc=normalComboPrice-discountedComboPrice; // ahorro en precio
+  // Envío real siempre visible en subtotal
+  var envioReal=15000;
+  var subtotal=subtotalPrendas+envioReal;
 
-  // Total después del descuento de combo
-  var totalAfterCombo=subtotal-comboDisc;
+  // Descuento combo en precio de prendas
+  var normalComboPrice=combos*(45000+70000);
+  var discountedComboPrice=combos*99900;
+  var comboDisc=normalComboPrice-discountedComboPrice; // $15.100
 
-  // Envío: gratis si totalAfterCombo >= $99.900, si no $10.000
-  var envio=totalAfterCombo>=99900?0:10000;
+  // Descuento de envío
+  var envioDisc=combos>0?envioReal:(envioReal-10000); // combo: -$15.000 / sin combo: -$5.000
 
-  var total=totalAfterCombo+envio;
+  // Envío: gratis si hay al menos 1 combo, $10.000 si no
+  var envio=combos>0?0:10000;
+  var total=subtotalPrendas-comboDisc+envio;
 
   return{
     subtotal:subtotal,
+    subtotalPrendas:subtotalPrendas,
     combos:combos,
     comboDisc:comboDisc,
     extraTops:extraTops,
     extraPants:extraPants,
+    envioReal:envioReal,
+    envioDisc:envioDisc,
     envio:envio,
     total:total
   };
@@ -784,15 +788,26 @@ function renderPanel(){
   var t=calcTotals();
   document.getElementById("pij-sum-sub").textContent=fmt(t.subtotal);
   var cr=document.getElementById("pij-sum-combo-row");
-  if(t.combos>0){cr.style.display="flex";document.getElementById("pij-sum-combo").textContent="−"+fmt(t.comboDisc);}else{cr.style.display="none";}
-  // Envío
-  var envioRow=document.getElementById("pij-sum-envio-val");
-  if(envioRow){envioRow.textContent=t.envio===0?"Gratis 🎉":fmt(t.envio);envioRow.style.color=t.envio===0?"#2ECC40":"";}
+  if(t.combos>0){
+    cr.style.display="flex";
+    document.getElementById("pij-sum-combo").textContent="−"+fmt(t.comboDisc);
+  } else {
+    cr.style.display="none";
+  }
+  // Envío desglosado
+  var envioRow=document.getElementById("pij-sum-envio-row");
+  if(envioRow){
+    if(t.combos>0){
+      envioRow.innerHTML='<span>Envío <span style="text-decoration:line-through;color:rgba(255,255,255,.2);font-size:10px">'+fmt(t.envioReal)+'</span></span><span class="pij-sum-val" style="color:#2ECC40">Gratis 🎉</span>';
+    } else {
+      envioRow.innerHTML='<span>Envío <span style="text-decoration:line-through;color:rgba(255,255,255,.2);font-size:10px">'+fmt(t.envioReal)+'</span></span><span class="pij-sum-val">'+fmt(t.envio)+'</span>';
+    }
+  }
   document.getElementById("pij-sum-total").textContent=fmt(t.total);
   // Nota combo
   var notaEl=document.getElementById("pij-combo-nota");
   if(notaEl){
-    if(t.combos>0){notaEl.style.display="block";notaEl.textContent="🎁 "+t.combos+" combo"+(t.combos>1?"s":"")+" · $99.900 c/u con envío incluido · Ahorras "+fmt(t.comboDisc);}
+    if(t.combos>0){notaEl.style.display="block";notaEl.textContent=t.combos+" combo"+(t.combos>1?"s":"")+" · $99.900 c/u con envío incluido · Ahorras "+fmt(t.comboDisc+t.envioReal);}
     else{notaEl.style.display="none";}
   }
   summary.style.display="block";foot.style.display="block";
@@ -819,11 +834,16 @@ window.openCo=function(contra){
   var t=calcTotals();
   var extraContra=contra?5000:0;
   var lines=cart.map(function(c){return'<div class="pij-co-res-item">'+c.qty+"× "+c.item.name+" T"+c.size+" — "+fmt(c.item.price*c.qty)+'</div>';}).join("");
-  if(t.combos>0)lines+='<div class="pij-co-res-item" style="color:#2ECC40">🎁 Descuento combo ('+t.combos+') −'+fmt(t.comboDisc)+'</div>';
-  if(t.envio>0)lines+='<div class="pij-co-res-item">📦 Envío — '+fmt(t.envio)+'</div>';
-  else lines+='<div class="pij-co-res-item" style="color:#2ECC40">📦 Envío — Gratis</div>';
-  if(contra)lines+='<div class="pij-co-res-item" style="color:rgba(255,255,255,.5)">Recargo contraentrega +'+fmt(extraContra)+'</div>';
-  lines+='<div class="pij-co-res-total">Total: '+fmt(t.total+extraContra)+'</div>';
+  lines+='<div class="pij-co-res-item" style="color:rgba(255,255,255,.4)">Envío real — '+fmt(t.envioReal)+'</div>';
+  lines+='<div class="pij-co-res-item" style="border-top:.5px solid rgba(255,255,255,.1);margin-top:6px;padding-top:6px">Subtotal — '+fmt(t.subtotal)+'</div>';
+  if(t.combos>0){
+    lines+='<div class="pij-co-res-item" style="color:#2ECC40">Descuento combo — −'+fmt(t.comboDisc)+'</div>';
+    lines+='<div class="pij-co-res-item" style="color:#2ECC40">Envío — Gratis <span style="text-decoration:line-through;color:rgba(255,255,255,.25)">'+fmt(t.envioReal)+'</span></div>';
+  } else {
+    lines+='<div class="pij-co-res-item">Envío — <span style="text-decoration:line-through;color:rgba(255,255,255,.3)">'+fmt(t.envioReal)+'</span> '+fmt(t.envio)+'</div>';
+  }
+  if(contra)lines+='<div class="pij-co-res-item" style="color:rgba(255,255,255,.5)">Recargo contraentrega — +'+fmt(extraContra)+'</div>';
+  lines+='<div class="pij-co-res-total">Total — '+fmt(t.total+extraContra)+'</div>';
   document.getElementById("pij-co-resumen").innerHTML='<div class="pij-co-res-title">Resumen del pedido</div>'+lines;
   document.getElementById("pij-co-ov").classList.add("on");document.body.style.overflow="hidden";
 };
@@ -880,7 +900,6 @@ function wizardAddToCart(id){
   addToCart(c.top,c.topSize);
   addToCart(c.pants,c.pantsSize);
   wizardRemove(id);
-  toggleCart();
 }
 
 function renderWizard(){
@@ -924,7 +943,7 @@ function renderWizard(){
     }).join('');
 
     var footerInfo=complete
-      ? '<div class="wz-footer-info"><strong>$99.900</strong> · <span class="wz-envio">📦 Envío incluido</span></div>'
+      ? '<div class="wz-footer-info"><strong>$99.900</strong> · <span class="wz-envio">Envío incluido</span></div>'
       : '<div class="wz-footer-info">Elige camiseta y pantalón</div>';
 
     div.innerHTML=''
