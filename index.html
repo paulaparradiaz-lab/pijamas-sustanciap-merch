@@ -257,8 +257,8 @@ body{font-family:'Nunito',sans-serif;background:#12001f}
 /* ══ HERO ══ */
 #hero{background:#12001f;overflow:hidden;position:relative}
 #hero-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:clamp(80px,22vw,240px);color:white;opacity:.05;letter-spacing:-.03em;text-transform:uppercase;pointer-events:none;user-select:none;white-space:nowrap;z-index:0}
-#stage{position:relative;z-index:5;display:grid;grid-template-columns:1fr 1fr;height:300px}
-.lane{position:relative;overflow:hidden;cursor:pointer;transition:background-color 500ms ease}
+#stage{position:relative;z-index:5;display:grid;grid-template-columns:1fr 1fr;height:300px;user-select:none;-webkit-user-select:none}
+.lane{position:relative;overflow:hidden;cursor:pointer;transition:background-color 500ms ease;user-select:none;-webkit-user-select:none}
 .lane-left{border-right:1px solid rgba(255,255,255,.06)}
 .lane-label{position:absolute;top:12px;left:0;right:0;text-align:center;z-index:20;font-size:9px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:'Nunito',sans-serif;pointer-events:none}
 .prenda-stage{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:48px}
